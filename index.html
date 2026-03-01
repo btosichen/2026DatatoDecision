@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Data to Decision - AI 素養學習</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+            background-color: #fffbeb; /* amber-50 */
+            color: #374151;
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .bounce-hover:hover {
+            transform: translateY(-3px) scale(1.02);
+        }
+        /* 自訂可愛的捲軸 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fef3c7; }
+        ::-webkit-scrollbar-thumb { background: #fcd34d; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #fbbf24; }
+    </style>
+</head>
+<body class="min-h-screen relative pb-20 overflow-x-hidden">
+
+    <!-- 頂部導覽列 -->
+    <nav class="bg-white border-b-4 border-amber-200 shadow-sm p-4 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-3 text-pink-500 font-black text-xl md:text-2xl tracking-wide">
+                <div class="bg-pink-100 p-2 rounded-xl">
+                    <i data-lucide="brain-circuit" class="w-6 h-6 md:w-8 md:h-8"></i>
+                </div>
+                <span>AI 素養大挑戰</span>
+            </div>
+            <div class="flex bg-amber-100 rounded-2xl p-1.5 shadow-inner">
+                <button id="tab-student" onclick="switchTab('student')" class="px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-md">
+                    <i data-lucide="gamepad-2" class="inline w-4 h-4 mr-1"></i> 學生模式
+                </button>
+                <button id="tab-teacher" onclick="switchTab('teacher')" class="px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all text-amber-700 hover:bg-amber-200">
+                    <i data-lucide="graduation-cap" class="inline w-4 h-4 mr-1"></i> 教師專區
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-5xl mx-auto p-4 md:p-6 mt-4">
+        
+        <!-- 視圖 1：學生 - 歡迎頁面 -->
+        <section id="view-intro" class="fade-in flex flex-col items-center justify-center py-10 md:py-20">
+            <div class="bg-white p-8 md:p-12 rounded-[3rem] border-4 border-amber-100 text-center shadow-2xl shadow-orange-200/50 max-w-2xl relative w-full">
+                <!-- 裝飾小圖示 -->
+                <i data-lucide="sparkles" class="absolute top-8 left-8 text-yellow-400 w-10 h-10 animate-pulse"></i>
+                <i data-lucide="zap" class="absolute bottom-12 right-10 text-pink-400 w-8 h-8 animate-bounce"></i>
+
+                <div class="w-24 h-24 bg-gradient-to-br from-teal-400 to-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg shadow-teal-200 rotate-3">
+                    <i data-lucide="database" class="text-white w-12 h-12"></i>
+                </div>
+                <h1 class="text-3xl md:text-5xl font-black mb-6 text-gray-800 leading-tight">
+                    From Data to Decision<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500">人工智慧與你的生活</span>
+                </h1>
+                <p class="text-gray-600 mb-8 text-lg md:text-xl font-medium leading-relaxed">
+                    歡迎來到 Verysafeland 虛擬城市！🌆<br>
+                    在這裡，AI 正在分析你的每一個動作...<br>
+                    你能看穿演算法背後的秘密，成為聰明的數位公民嗎？
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm font-bold text-gray-700 mb-10">
+                    <div class="bg-amber-100 px-4 py-2 rounded-full flex items-center gap-2 border border-amber-200">
+                        <i data-lucide="target" class="text-orange-500 w-5 h-5"></i> 25 個挑戰關卡
+                    </div>
+                    <div class="bg-teal-100 px-4 py-2 rounded-full flex items-center gap-2 border border-teal-200">
+                        <i data-lucide="puzzle" class="text-teal-600 w-5 h-5"></i> 6 大素養任務
+                    </div>
+                </div>
+                
+                <div class="flex flex-col gap-4 items-center">
+                    <button onclick="showLogin()" class="bounce-hover w-full md:w-auto bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 text-white font-black text-xl py-4 px-12 rounded-full shadow-xl shadow-pink-300 flex items-center justify-center gap-3">
+                        開始挑戰！ <i data-lucide="rocket" class="w-6 h-6"></i>
+                    </button>
+                    
+                    <!-- 觀看試算表紀錄連結 -->
+                    <a href="https://docs.google.com/spreadsheets/d/1zS2s3XhTUES7nRHOzxN3C61xiEnOLJp60MEKH-cfH6A/edit?usp=sharing" target="_blank" class="bounce-hover mt-4 flex items-center gap-2 bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-200 font-bold py-3 px-8 rounded-full transition-colors">
+                        <i data-lucide="table" class="w-5 h-5"></i> 查看班級作答排行榜
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 視圖 1.5：學生資料填寫 (登入) -->
+        <section id="view-login" class="hidden fade-in flex flex-col items-center justify-center py-10 md:py-20">
+            <div class="bg-white p-8 md:p-12 rounded-[3rem] border-4 border-teal-100 text-center shadow-2xl shadow-teal-200/50 max-w-md w-full relative">
+                <div class="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i data-lucide="user-circle-2" class="text-teal-500 w-10 h-10"></i>
+                </div>
+                <h2 class="text-2xl font-black text-gray-800 mb-6">建立特務檔案</h2>
+                
+                <div class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-gray-600 font-bold mb-2 ml-2">選擇班級</label>
+                        <select id="input-class" class="w-full bg-gray-50 border-2 border-gray-200 focus:border-teal-400 rounded-2xl p-4 font-bold text-gray-700 outline-none transition-colors appearance-none">
+                            <option value="" disabled selected>-- 請選擇班級 --</option>
+                            <option value="801">801 班</option>
+                            <option value="802">802 班</option>
+                            <option value="803">803 班</option>
+                            <option value="804">804 班</option>
+                            <option value="805">805 班</option>
+                            <option value="806">806 班</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 font-bold mb-2 ml-2">座號</label>
+                        <input type="number" id="input-num" min="1" max="50" placeholder="例如：5" class="w-full bg-gray-50 border-2 border-gray-200 focus:border-teal-400 rounded-2xl p-4 font-bold text-gray-700 outline-none transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 font-bold mb-2 ml-2">姓名</label>
+                        <input type="text" id="input-name" placeholder="請輸入真實姓名" class="w-full bg-gray-50 border-2 border-gray-200 focus:border-teal-400 rounded-2xl p-4 font-bold text-gray-700 outline-none transition-colors">
+                    </div>
+                </div>
+
+                <div id="login-error" class="hidden text-rose-500 font-bold mt-4 text-sm bg-rose-50 p-3 rounded-xl border border-rose-200">
+                    <i data-lucide="alert-circle" class="inline w-4 h-4 mr-1"></i> 請完整填寫班級、座號與姓名喔！
+                </div>
+
+                <button onclick="startQuizActual()" class="mt-8 bounce-hover w-full bg-teal-500 hover:bg-teal-400 text-white font-black text-xl py-4 px-8 rounded-2xl shadow-lg shadow-teal-200 flex items-center justify-center gap-2">
+                    確認出發 <i data-lucide="play" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 視圖 2：學生 - 測驗頁面 -->
+        <section id="view-quiz" class="hidden fade-in">
+            <!-- 進度條 -->
+            <div class="mb-8 bg-white p-4 rounded-3xl shadow-sm border-2 border-amber-100 flex flex-col md:flex-row gap-4 justify-between items-center">
+                <div class="w-full md:w-2/3">
+                    <div class="flex justify-between text-sm font-bold text-gray-500 mb-3 px-2">
+                        <span id="progress-text" class="flex items-center gap-2">
+                            <i data-lucide="map" class="w-4 h-4 text-teal-500"></i> 模組 1: 你的數據足跡
+                        </span>
+                        <span id="progress-count" class="bg-amber-100 text-orange-600 px-3 py-1 rounded-full">1 / 25</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-4 shadow-inner overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-teal-400 to-blue-500 h-4 rounded-full transition-all duration-500 relative" style="width: 5%">
+                            <div class="absolute inset-0 bg-white/20 w-full h-full" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.3) 10px, rgba(255,255,255,0.3) 20px);"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 顯示登入者身分 -->
+                <div class="bg-teal-50 px-4 py-2 rounded-2xl border border-teal-100 flex items-center gap-2 font-bold text-teal-700 text-sm">
+                    <i data-lucide="user" class="w-4 h-4"></i> <span id="display-student-info">801 班 1 號 小明</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-5 gap-6 md:gap-8">
+                <!-- 左側：情境圖卡 -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="bg-white border-4 border-teal-100 rounded-[2.5rem] p-6 flex flex-col items-center justify-center h-72 relative shadow-xl shadow-teal-100 group overflow-hidden">
+                        <!-- 活潑的背景圓圈 -->
+                        <div class="absolute top-[-20px] right-[-20px] w-32 h-32 bg-teal-50 rounded-full opacity-50 group-hover:scale-110 transition-transform"></div>
+                        <div class="absolute bottom-[-20px] left-[-20px] w-24 h-24 bg-blue-50 rounded-full opacity-50 group-hover:scale-110 transition-transform"></div>
+                        
+                        <div id="q-icon-container" class="bg-teal-100 p-4 rounded-3xl mb-4 group-hover:-translate-y-2 transition-transform shadow-md shadow-teal-200">
+                            <!-- JS 動態插入 Icon -->
+                        </div>
+                        <h3 id="q-card-title" class="text-2xl font-black text-gray-800 z-10 text-center">情境標題</h3>
+                        <span class="text-sm font-bold bg-amber-100 text-orange-600 px-4 py-1.5 rounded-full mt-4 z-10 border border-amber-200 flex items-center gap-1">
+                            <i data-lucide="search" class="w-4 h-4"></i> 情境分析
+                        </span>
+                    </div>
+                    
+                    <div class="bg-white rounded-3xl p-5 border-4 border-pink-100 shadow-md flex justify-between items-center">
+                        <span class="font-bold text-gray-600 flex items-center gap-2">
+                            <i data-lucide="star" class="text-yellow-400 fill-yellow-400 w-5 h-5"></i> 獲得星星
+                        </span>
+                        <span id="score-display" class="text-3xl font-black text-pink-500">0</span>
+                    </div>
+                </div>
+
+                <!-- 右側：題目區 -->
+                <div class="md:col-span-3 bg-white border-4 border-amber-100 rounded-[2.5rem] p-6 md:p-10 flex flex-col shadow-xl shadow-amber-100/50">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span id="q-type-badge" class="bg-purple-100 text-purple-600 text-sm font-black px-3 py-1.5 rounded-lg border-2 border-purple-200 flex items-center gap-1">
+                            單選題
+                        </span>
+                    </div>
+                    
+                    <h2 id="q-text" class="text-xl md:text-2xl font-bold mb-6 text-gray-800 leading-relaxed">
+                        題目內容
+                    </h2>
+
+                    <!-- 選項容器 -->
+                    <div id="q-options" class="flex-grow space-y-3 mb-6">
+                        <!-- JS 動態插入選項 -->
+                    </div>
+
+                    <button id="btn-submit" onclick="submitAnswer()" class="w-full bg-gradient-to-r from-gray-300 to-gray-400 text-white font-bold py-4 px-6 rounded-2xl shadow-md cursor-not-allowed transition-all text-lg" disabled>
+                        送出答案
+                    </button>
+
+                    <!-- 回饋區塊 (預設隱藏) -->
+                    <div id="feedback-box" class="hidden mt-6 p-6 rounded-3xl border-4 fade-in">
+                        <div class="flex items-start gap-4">
+                            <div id="feedback-icon" class="mt-1 flex-shrink-0 bg-white rounded-full p-1 shadow-sm"></div>
+                            <div>
+                                <h4 id="feedback-title" class="font-black text-xl mb-2">正確！</h4>
+                                <p id="feedback-text" class="text-gray-700 font-medium leading-relaxed">解析內容</p>
+                            </div>
+                        </div>
+                        <button onclick="nextQuestion()" id="btn-next" class="mt-6 bounce-hover w-full bg-gray-800 hover:bg-gray-700 text-white font-black py-4 px-4 rounded-2xl shadow-lg flex items-center justify-center gap-2 text-lg">
+                            下一題 <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 視圖 3：學生 - 學習報告頁面 -->
+        <section id="view-report" class="hidden fade-in py-10">
+            <div class="bg-white border-4 border-amber-100 rounded-[3rem] p-8 md:p-12 shadow-2xl shadow-pink-200/40 relative overflow-hidden max-w-4xl mx-auto">
+                <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-pink-400 via-orange-400 to-teal-400"></div>
+                
+                <div class="text-center mb-10 relative z-10">
+                    <div class="inline-block bg-yellow-100 p-4 rounded-full mb-4">
+                        <i data-lucide="crown" class="text-yellow-500 w-16 h-16 animate-bounce"></i>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-black text-gray-800 mb-3">學習成效雷達報告</h1>
+                    <p class="text-gray-500 font-bold flex items-center justify-center gap-2">
+                        <i data-lucide="award" class="w-5 h-5 text-pink-400"></i> AI 素養挑戰結業證明
+                    </p>
+                    
+                    <!-- 雲端儲存狀態 -->
+                    <div id="cloud-sync-status" class="mt-4 inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold border border-blue-200">
+                        <i data-lucide="cloud-upload" class="w-4 h-4 animate-bounce"></i> 資料正在同步至雲端試算表...
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 rounded-[2rem] p-8 mb-10 flex flex-col md:flex-row items-center gap-8 border-2 border-amber-200 shadow-inner">
+                    <div class="text-center md:text-left flex-1 border-b-2 md:border-b-0 md:border-r-2 border-amber-200 pb-6 md:pb-0 md:pr-6">
+                        <p class="text-gray-500 font-bold mb-2 uppercase tracking-widest text-sm">最終獲得星星</p>
+                        <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500 flex items-center md:justify-start justify-center gap-2">
+                            <span id="report-score">25</span> <span class="text-3xl text-gray-400">/ 25</span>
+                        </div>
+                    </div>
+                    <div class="flex-2 w-full md:w-2/3">
+                        <div class="bg-white p-6 rounded-2xl shadow-md border-l-8 border-teal-400">
+                            <h3 id="report-level-title" class="text-2xl font-black text-gray-800 mb-3 flex items-center gap-2"></h3>
+                            <p id="report-level-desc" class="text-gray-600 font-medium leading-relaxed text-lg"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 四大能力分析 -->
+                <h3 class="text-center font-bold text-gray-500 mb-6 tracking-widest">四大素養能力雷達</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                    <div class="bg-white p-5 rounded-3xl border-2 border-blue-100 shadow-md text-center hover:-translate-y-1 transition-transform">
+                        <div class="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i data-lucide="database" class="text-blue-500 w-7 h-7"></i>
+                        </div>
+                        <div class="font-bold text-gray-800 mb-1">理解 AI 預測</div>
+                        <div class="text-sm font-black text-blue-500 bg-blue-50 py-1 rounded-lg">精熟級</div>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl border-2 border-purple-100 shadow-md text-center hover:-translate-y-1 transition-transform">
+                        <div class="bg-purple-100 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i data-lucide="scale" class="text-purple-500 w-7 h-7"></i>
+                        </div>
+                        <div class="font-bold text-gray-800 mb-1">預測與決策</div>
+                        <div class="text-sm font-black text-purple-500 bg-purple-50 py-1 rounded-lg">精熟級</div>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl border-2 border-orange-100 shadow-md text-center hover:-translate-y-1 transition-transform">
+                        <div class="bg-orange-100 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i data-lucide="alert-triangle" class="text-orange-500 w-7 h-7"></i>
+                        </div>
+                        <div class="font-bold text-gray-800 mb-1">辨識資料偏差</div>
+                        <div class="text-sm font-black text-orange-500 bg-orange-50 py-1 rounded-lg">精熟級</div>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl border-2 border-emerald-100 shadow-md text-center hover:-translate-y-1 transition-transform">
+                        <div class="bg-emerald-100 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i data-lucide="shield-alert" class="text-emerald-500 w-7 h-7"></i>
+                        </div>
+                        <div class="font-bold text-gray-800 mb-1">設計防護網</div>
+                        <div class="text-sm font-black text-emerald-500 bg-emerald-50 py-1 rounded-lg">精熟級</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <button onclick="window.print()" class="bounce-hover bg-gray-800 hover:bg-gray-700 text-white font-bold py-4 px-8 rounded-2xl shadow-lg flex items-center justify-center gap-2">
+                        <i data-lucide="download" class="w-5 h-5"></i> 匯出學習履歷 PDF
+                    </button>
+                    <!-- 新增回到首頁看成績的按鈕 -->
+                    <a href="https://docs.google.com/spreadsheets/d/1zS2s3XhTUES7nRHOzxN3C61xiEnOLJp60MEKH-cfH6A/edit?usp=sharing" target="_blank" class="bounce-hover bg-blue-100 text-blue-600 hover:bg-blue-200 border-2 border-blue-300 font-bold py-4 px-8 rounded-2xl shadow-sm flex items-center justify-center gap-2">
+                        <i data-lucide="list" class="w-5 h-5"></i> 觀看全班成績表
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 視圖 4：教師專區 -->
+        <section id="view-teacher" class="hidden fade-in space-y-8 py-6">
+            <div class="bg-white border-l-8 border-teal-400 p-8 rounded-3xl shadow-xl shadow-teal-100/50 flex flex-col md:flex-row gap-6 items-center">
+                <div class="bg-teal-50 p-4 rounded-full flex-shrink-0">
+                    <i data-lucide="lightbulb" class="text-teal-500 w-12 h-12"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-black text-gray-800 mb-2">專為八年級設計的「AI 素養教案」</h2>
+                    <p class="text-gray-600 font-medium leading-relaxed">
+                        本 Web App 將生硬的「人工智慧、監控與人類責任」轉化為 30-40 分鐘的闖關遊戲。採用國中生喜愛的鮮明色彩與扁平化圖示，並自動綁定 Google 試算表收集班級成績與作答歷程，完全符合【AI 素養普及計畫獎】四大評分指標：多元互動、情境視覺化、具體評量、跨領域推廣。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 其他教師區內容保留... -->
+             <div class="bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 rounded-[2.5rem] p-8 md:p-12 shadow-2xl flex flex-col items-center text-center text-white relative overflow-hidden">
+                <i data-lucide="gift" class="absolute top-10 left-10 text-white/20 w-16 h-16 rotate-12"></i>
+                <i data-lucide="file-text" class="absolute bottom-10 right-10 text-white/20 w-20 h-20 -rotate-12"></i>
+                
+                <div class="bg-white/20 p-4 rounded-full mb-6 backdrop-blur-sm border border-white/30">
+                    <i data-lucide="share-2" class="w-10 h-10"></i>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-black mb-4">隨插即用！試算表自動連動</h3>
+                <p class="text-white/90 font-medium mb-8 max-w-2xl text-lg">
+                    純前端網頁設計，無需後台安裝，點開連結即可全班互動。系統已設定好 Google Apps Script (GAS)，學生的每一題作答、秒數都會自動匯入老師的 Excel/Sheet 中！
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // ==========================================
+        // 老師注意：請把下方的字串換成你的 GAS 網頁應用程式 URL
+        // ==========================================
+        const GAS_URL = "請換成你的_GAS_網址"; 
+        
+        // --- 資料庫：25題完整題目 ---
+        const questionsData = [
+            { id: 1, module: 1, type: "multi", icon: "smartphone", cardTitle: "手機使用情境", question: "從早上起床到出門，哪些行為會留下你的「數位足跡」？（多選）", options: ["滑 IG 看限時動態", "用 Google Map 查公車時刻", "用人臉解鎖手機", "把手機放在口袋裡純待機（開啟定位）"], correct: [0, 1, 2, 3], explanation: "即使只是待機，只要開啟定位或背景更新，手機仍會持續傳送數據，形成你的數位足跡。" },
+            { id: 2, module: 1, type: "single", icon: "wifi", cardTitle: "公共 WiFi 陷阱", question: "當你連接捷運站的免費公共 WiFi 時，最可能發生的資料風險是？", options: ["手機會立刻中毒壞掉", "網路服務商可以記錄你瀏覽了哪些網站", "你的大腦記憶會被讀取", "你的所有密碼會自動公開給所有人"], correct: 1, explanation: "公共 WiFi 的提供者（或潛伏的駭客）有能力攔截並記錄未加密的瀏覽紀錄和應用程式數據。" },
+            { id: 3, module: 1, type: "single", icon: "database", cardTitle: "社群平台迷思", question: "判斷題：只要我從來不在社群平台上發文或留言，平台就不會收集到關於我的任何資料。", options: ["正確", "錯誤"], correct: 1, explanation: "錯誤！平台會記錄你的「停留時間」、「滑動速度」、「點擊的廣告」等行為數據，用來預測你的喜好。" },
+            { id: 4, module: 1, type: "single", icon: "activity", cardTitle: "數據足跡分數", question: "情境分析：畫面顯示你的「Data Footprint Score」高達 95 分。這通常代表什麼意思？", options: ["代表你在網路上的行為非常安全", "代表你留下了大量的數位軌跡，容易被演算法分析", "代表你的考試成績會很好", "代表你完全沒有使用網路"], correct: 1, explanation: "分數越高代表你釋出的個人資料與行為特徵越多，演算法能更輕易地為你建立個人數位模型。" },
+            { id: 5, module: 1, type: "single", icon: "eye", cardTitle: "無所不在的感測器", question: "除了手機，現代城市中還有什麼設備正在大量收集我們的數據？", options: ["路邊的石頭", "公園的樹木", "路口的監視器與智慧路燈", "天空的雲朵"], correct: 2, explanation: "智慧城市透過無所不在的攝影機、感測器來收集車流、人臉與環境數據。" },
+            
+            { id: 6, module: 2, type: "single", icon: "scan-face", cardTitle: "信心值迷思", question: "判斷題：當 AI 的臉部辨識系統顯示「信心值 99%」時，代表它絕對不可能認錯人。", options: ["正確", "錯誤"], correct: 1, explanation: "錯誤！99% 只是 AI 主觀認為自己正確的機率，若訓練資料有缺陷，AI 會「非常有自信地犯錯」。" },
+            { id: 7, module: 2, type: "single", icon: "server", cardTitle: "訓練資料偏少", question: "情境分析：如果某 AI 系統只看過「成年人」的照片來學習，當辨識「國中生」時，準確率會如何？", options: ["一樣準確，因為都是人類", "大幅下降，因為它沒有學習過青少年的特徵", "會變更高，因為小孩的臉比較簡單", "系統會直接當機"], correct: 1, explanation: "AI 只能依賴它看過的「訓練資料」來建立模式。沒看過的特徵，它就無法準確預測。" },
+            { id: 8, module: 2, type: "single", icon: "brain-circuit", cardTitle: "AI 學習四部曲", question: "請選出 AI 學習臉部辨識的正確順序：\n(B)收集照片 -> (D)標註特徵 -> (C)找數學模式 -> (A)進行預測", options: ["B, D, C, A (正確順序)", "A, B, C, D", "C, B, D, A", "B, C, D, A"], correct: 0, explanation: "AI 訓練流程：收集資料(B) -> 標註資料(D) -> 尋找模式(C) -> 應用預測(A)。" },
+            { id: 9, module: 2, type: "single", icon: "alert-triangle", cardTitle: "族群辨識差異", question: "為什麼某些 AI 系統在辨識「特定膚色或性別」時，特別容易出錯？", options: ["因為 AI 故意歧視", "因為工程師寫錯程式", "因為訓練資料庫中，該族群的照片比例太少", "因為相機拍不清楚"], correct: 2, explanation: "這稱為「代表性不足」。當資料庫缺乏多樣性，AI 就無法準確辨識少數群體。" },
+            { id: 10, module: 2, type: "single", icon: "user-x", cardTitle: "特徵盲點", question: "資料庫五個人只有一個戴眼鏡。如果 AI 把「戴眼鏡」當成犯罪特徵，這說明了什麼？", options: ["AI 擁有超越人類的洞察力", "AI 會盲目找出數據間的「假性相關」導致錯誤", "AI 討厭戴眼鏡的人", "證明戴眼鏡真的很危險"], correct: 1, explanation: "AI 擅長找規律，但不懂「因果關係」。它可能會把隨機的巧合（如戴眼鏡）當成絕對標準。" },
+
+            { id: 11, module: 3, type: "single", icon: "shield-alert", cardTitle: "嫌疑分數系統", question: "在 Verysafeland 機場，AI 算出旅客的「嫌疑分數」。請問 AI 在這裡執行的任務是？", options: ["下達最終判決（決策）", "尋找模式並給出機率（預測）", "完全取代警察工作", "隨機瞎猜"], correct: 1, explanation: "AI 計算分數只是一種基於歷史資料的「預測」，不是最終的「決策」。" },
+            { id: 12, module: 3, type: "single", icon: "camera", cardTitle: "預測等於定罪？", question: "判斷題：旅客嫌疑分數高達 90 分，警察應該直接將他逮捕定罪，不需調查。", options: ["正確", "錯誤"], correct: 1, explanation: "錯誤！AI 預測不能作為唯一依據，高分可能是演算法偏見，人類必須介入調查。" },
+            { id: 13, module: 3, type: "multi", icon: "bar-chart-4", cardTitle: "數據關聯性", question: "哪些行為數據「可能」會被機場 AI 收集並影響分數？（多選）", options: ["走路的速度與路線", "心跳頻率與熱像儀體溫", "攜帶行李的數量", "在家裡玩什麼遊戲"], correct: [0, 1, 2], explanation: "機場監視器與感測器能捕捉步態、體溫等物理行為。家中數據通常不連線至機場。" },
+            { id: 14, module: 3, type: "single", icon: "activity-square", cardTitle: "分數異常飆高", question: "旅客因快錯過班機而「奔跑」，被 AI 判定「疑似逃跑」。這顯示 AI 缺乏什麼能力？", options: ["運算速度不夠", "缺乏理解人類真實「動機與情境脈絡」的能力", "攝影機畫素太低", "沒有學習過跑步"], correct: 1, explanation: "AI 只能看到「奔跑」表象，無法像人類一樣同理背後「趕飛機」的情境。" },
+            { id: 15, module: 3, type: "single", icon: "scale", cardTitle: "人機分工", question: "如果 AI 負責的是「預測」，那人類警察應該負責做什麼？", options: ["什麼都不做，聽 AI 的", "幫 AI 計算數字", "根據 AI 預測進行人工查證，並做出最終「決策」", "關閉 AI 系統"], correct: 2, explanation: "這就是「人機協作」核心：AI 提供預測，人類負責把關、查證並做出負責任的決策。" },
+            { id: 16, module: 3, type: "single", icon: "bot", cardTitle: "機器絕對中立？", question: "判斷題：因為 AI 是機器沒有情緒，所以判斷永遠比人類客觀公平。", options: ["正確", "錯誤"], correct: 1, explanation: "錯誤！訓練資料來自充滿偏見的人類社會，AI 完全有可能繼承甚至放大人類偏見。" },
+            { id: 17, module: 3, type: "open", icon: "message-square-text", cardTitle: "你的抉擇", question: "開放式：如果你是機場負責人，發現 AI 常誤判特定國家旅客，你會怎麼辦？（請輸入想法）", options: [], correct: null, explanation: "【解析】最佳做法應包含：暫停自動執法、引入人類審查、請工程師檢視資料偏差並重新訓練。" },
+
+            { id: 18, module: 4, type: "single", icon: "pie-chart", cardTitle: "認識資料偏差", question: "什麼是「資料偏差」（Data Bias）？", options: ["資料庫硬碟壞掉", "訓練資料無法代表真實世界的多元情況，導致結果不公", "AI 數學算錯", "網路傳輸太慢"], correct: 1, explanation: "當資料過度集中於特定群體，忽略其他群體時，就會產生代表性不足的資料偏差。" },
+            { id: 19, module: 4, type: "single", icon: "globe-2", cardTitle: "系統外銷問題", question: "一個只用「亞洲人」訓練出的 AI，直接賣到歐洲機場使用，最可能發生什麼事？", options: ["準確率一樣高", "把歐洲人全當成亞洲人", "對歐洲旅客的辨識錯誤率大幅飆高", "學會說歐洲話"], correct: 2, explanation: "缺乏當地多元資料訓練，模型在新的環境下會嚴重失效。" },
+            { id: 20, module: 4, type: "multi", icon: "shield-check", cardTitle: "對抗偏差", question: "我們該如何減少 AI 系統中的資料偏差？（多選）", options: ["收集包含各種性別、種族的多元資料", "讓開發團隊組成更多元", "隱瞞 AI 出錯的數據", "定期對 AI 系統進行公平性測試"], correct: [0, 1, 3], explanation: "隱瞞錯誤無法解決問題。需要從多元資料、開發團隊多樣性，以及持續稽核來對抗偏差。" },
+            { id: 21, module: 4, type: "open", icon: "siren", cardTitle: "生活中的災難", question: "開放式：請舉一個生活中如果 AI 存在偏差，可能會造成嚴重後果的例子。", options: [], correct: null, explanation: "【解析】例如：醫療診斷 AI 若只訓練白人皮膚照片，可能無法正確診斷有色人種皮膚癌，延誤就醫。" },
+
+            { id: 22, module: 5, type: "single", icon: "git-branch", cardTitle: "預測與決策", question: "以下何者屬於機器的「預測」行為？", options: ["法官宣判嫌犯入獄", "醫生決定開刀切除腫瘤", "AI 計算出嫌犯再犯機率 80%", "警察拔槍射擊"], correct: 2, explanation: "計算機率是基於資料的「預測」；宣判、開刀、拔槍是影響人類命運的最終「決策」。" },
+            { id: 23, module: 5, type: "single", icon: "gavel", cardTitle: "保留決策權", question: "為什麼我們不能完全把重大「決策權」交給 AI？", options: ["因為 AI 運算太慢", "因為 AI 無法承擔法律與道德責任，也沒有同理心", "因為 AI 會覺得累", "因為 AI 比較省錢"], correct: 1, explanation: "決策伴隨後果與責任。機器無法坐牢或展現同理心，最終責任必須由人類承擔。" },
+
+            { id: 24, module: 6, type: "multi", icon: "shield", cardTitle: "建立防護網", question: "請選出 3 個最能保護民眾的「AI 保障機制(Safeguards)」？（請選三項）", options: ["強制設立人類審查機制", "全面禁止使用科技", "提供被誤判民眾申訴管道", "向大眾公開系統準確率與誤判率", "把決定權全交給最高階 AI"], correct: [0, 2, 3], explanation: "良好的防護包含：人類把關、救濟管道、以及透明度。禁止科技或盲目信任都不是解法。" },
+            { id: 25, module: 6, type: "multi", icon: "users", cardTitle: "公民的責任", question: "作為數位公民，面對無所不在的 AI，我們該怎麼做？（多選）", options: ["了解自己資料如何被收集使用", "對 AI 判斷保持懷疑與批判思考", "參與相關隱私政策公共討論", "認為這是工程師的事與我無關"], correct: [0, 1, 2], explanation: "AI 素養不僅是技術，更是公民參與。了解、批判並參與制定規則，是每個人的責任。" }
+        ];
+
+        const modulesName = ["你的數據足跡", "臉部辨識實驗", "機場監控情境", "資料偏差挑戰", "預測 vs 決策", "Safeguards 設計"];
+
+        // --- 全域狀態 ---
+        let state = {
+            currentQIndex: 0,
+            score: 0,
+            selectedSingle: null,
+            selectedMulti: [],
+            openText: "",
+            isFeedbackMode: false,
+            // 新增學生與紀錄資訊
+            student: { className: "", seatNum: "", name: "" },
+            answersLog: new Array(25).fill("未作答"),
+            startTime: null
+        };
+
+        // --- 初始化 ---
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+        });
+
+        // --- 切換 Tabs ---
+        function switchTab(tab) {
+            const btnStudent = document.getElementById('tab-student');
+            const btnTeacher = document.getElementById('tab-teacher');
+            const views = ['view-intro', 'view-login', 'view-quiz', 'view-report', 'view-teacher'];
+            
+            // 隱藏所有視圖
+            views.forEach(v => document.getElementById(v).classList.add('hidden'));
+
+            btnStudent.className = "px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all text-amber-700 hover:bg-amber-200";
+            btnTeacher.className = "px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all text-amber-700 hover:bg-amber-200";
+
+            if (tab === 'student') {
+                btnStudent.className = "px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-md";
+                
+                // 狀態機判斷目前在哪一頁
+                if (state.currentQIndex === 0 && state.score === 0 && !state.student.name) {
+                    document.getElementById('view-intro').classList.remove('hidden');
+                } else if (state.currentQIndex >= questionsData.length) {
+                    document.getElementById('view-report').classList.remove('hidden');
+                } else {
+                    document.getElementById('view-quiz').classList.remove('hidden');
+                }
+            } else {
+                btnTeacher.className = "px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-gradient-to-r from-teal-400 to-blue-500 text-white shadow-md";
+                document.getElementById('view-teacher').classList.remove('hidden');
+            }
+        }
+
+        // --- 顯示登入表單 ---
+        function showLogin() {
+            document.getElementById('view-intro').classList.add('hidden');
+            document.getElementById('view-login').classList.remove('hidden');
+        }
+
+        // --- 正式開始測驗 ---
+        function startQuizActual() {
+            const classVal = document.getElementById('input-class').value;
+            const numVal = document.getElementById('input-num').value;
+            const nameVal = document.getElementById('input-name').value.trim();
+            const errorDiv = document.getElementById('login-error');
+
+            if (!classVal || !numVal || !nameVal) {
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            errorDiv.classList.add('hidden');
+            
+            // 儲存學生資訊並記錄開始時間
+            state.student = { className: classVal, seatNum: numVal, name: nameVal };
+            state.startTime = new Date();
+
+            document.getElementById('display-student-info').innerText = `${classVal} 班 ${numVal} 號 - ${nameVal}`;
+
+            document.getElementById('view-login').classList.add('hidden');
+            document.getElementById('view-quiz').classList.remove('hidden');
+            loadQuestion(0);
+        }
+
+        // --- 載入題目 ---
+        function loadQuestion(index) {
+            state.isFeedbackMode = false;
+            state.selectedSingle = null;
+            state.selectedMulti = [];
+            state.openText = "";
+
+            const q = questionsData[index];
+            const modName = modulesName[q.module - 1];
+
+            // Update Progress Header
+            document.getElementById('progress-text').innerHTML = `<i data-lucide="map" class="w-4 h-4 text-teal-500 inline mr-1"></i> 模組 ${q.module}: ${modName}`;
+            document.getElementById('progress-count').innerText = `${index + 1} / 25`;
+            document.getElementById('progress-bar').style.width = `${((index) / 25) * 100}%`;
+            document.getElementById('score-display').innerText = state.score;
+
+            // Update Card
+            document.getElementById('q-icon-container').innerHTML = `<i data-lucide="${q.icon}" class="w-16 h-16 text-teal-600"></i>`;
+            document.getElementById('q-card-title').innerText = q.cardTitle;
+            
+            // Update Badge
+            let typeText = "單選題";
+            let typeColor = "purple";
+            if (q.type === 'multi') { typeText = "多選題"; typeColor = "orange"; }
+            else if (q.type === 'open') { typeText = "開放反思"; typeColor = "teal"; }
+
+            const badge = document.getElementById('q-type-badge');
+            badge.className = `bg-${typeColor}-100 text-${typeColor}-600 text-sm font-black px-3 py-1.5 rounded-lg border-2 border-${typeColor}-200 flex items-center gap-1`;
+            badge.innerText = typeText;
+
+            // Update Text
+            document.getElementById('q-text').innerText = q.question;
+
+            // Render Options
+            renderOptionsUI();
+
+            // Hide Feedback
+            document.getElementById('feedback-box').classList.add('hidden');
+            
+            lucide.createIcons();
+            updateSubmitButton();
+        }
+
+        // --- 渲染選項介面 ---
+        function renderOptionsUI() {
+            const q = questionsData[state.currentQIndex];
+            const container = document.getElementById('q-options');
+            let html = '';
+
+            if (q.type === 'single') {
+                q.options.forEach((opt, idx) => {
+                    const isSelected = state.selectedSingle === idx;
+                    const baseClass = "w-full text-left p-4 rounded-2xl border-4 transition-all font-bold text-lg flex items-center gap-3 bounce-hover";
+                    const colorClass = isSelected 
+                        ? "border-pink-400 bg-pink-50 text-pink-700 shadow-md" 
+                        : "border-gray-100 bg-gray-50 text-gray-600 hover:border-pink-200 hover:bg-pink-50/50";
+                    const dotClass = isSelected ? "bg-pink-500 border-pink-500" : "border-gray-300 bg-white";
+
+                    html += `
+                        <button onclick="handleSelectSingle(${idx})" class="${baseClass} ${colorClass}" ${state.isFeedbackMode ? 'disabled' : ''}>
+                            <div class="w-6 h-6 rounded-full border-4 flex items-center justify-center flex-shrink-0 transition-colors ${dotClass}"></div>
+                            <span class="leading-relaxed flex-1">${opt}</span>
+                        </button>
+                    `;
+                });
+            } else if (q.type === 'multi') {
+                q.options.forEach((opt, idx) => {
+                    const isSelected = state.selectedMulti.includes(idx);
+                    const baseClass = "w-full text-left p-4 rounded-2xl border-4 transition-all font-bold text-lg flex items-center gap-3 bounce-hover";
+                    const colorClass = isSelected 
+                        ? "border-orange-400 bg-orange-50 text-orange-700 shadow-md" 
+                        : "border-gray-100 bg-gray-50 text-gray-600 hover:border-orange-200 hover:bg-orange-50/50";
+                    const checkColor = isSelected ? "text-white" : "text-transparent";
+                    const boxColor = isSelected ? "bg-orange-500 border-orange-500" : "border-gray-300 bg-white";
+
+                    html += `
+                        <button onclick="handleSelectMulti(${idx})" class="${baseClass} ${colorClass}" ${state.isFeedbackMode ? 'disabled' : ''}>
+                            <div class="w-6 h-6 rounded-[0.4rem] border-4 flex items-center justify-center flex-shrink-0 transition-colors ${boxColor}">
+                                <i data-lucide="check" class="w-4 h-4 ${checkColor}"></i>
+                            </div>
+                            <span class="leading-relaxed flex-1">${opt}</span>
+                        </button>
+                    `;
+                });
+            } else if (q.type === 'open') {
+                html = `
+                    <textarea 
+                        id="open-input" 
+                        oninput="handleOpenInput(event)" 
+                        placeholder="請輸入你聰明的想法..." 
+                        class="w-full h-40 p-5 rounded-3xl border-4 border-teal-100 bg-teal-50/30 text-gray-800 font-bold text-lg placeholder-teal-300 focus:border-teal-400 focus:bg-white focus:outline-none resize-none transition-colors shadow-inner"
+                        ${state.isFeedbackMode ? 'disabled' : ''}
+                    >${state.openText}</textarea>
+                `;
+            }
+
+            container.innerHTML = html;
+            lucide.createIcons();
+        }
+
+        // --- 互動邏輯 ---
+        function handleSelectSingle(idx) {
+            if (state.isFeedbackMode) return;
+            state.selectedSingle = idx;
+            renderOptionsUI();
+            updateSubmitButton();
+        }
+
+        function handleSelectMulti(idx) {
+            if (state.isFeedbackMode) return;
+            if (state.selectedMulti.includes(idx)) {
+                state.selectedMulti = state.selectedMulti.filter(i => i !== idx);
+            } else {
+                state.selectedMulti.push(idx);
+            }
+            renderOptionsUI();
+            updateSubmitButton();
+        }
+
+        function handleOpenInput(e) {
+            if (state.isFeedbackMode) return;
+            state.openText = e.target.value;
+            updateSubmitButton();
+        }
+
+        function updateSubmitButton() {
+            const btn = document.getElementById('btn-submit');
+            const q = questionsData[state.currentQIndex];
+            let isValid = false;
+
+            if (q.type === 'single') isValid = state.selectedSingle !== null;
+            if (q.type === 'multi') isValid = state.selectedMulti.length > 0;
+            if (q.type === 'open') isValid = state.openText.trim().length > 0;
+
+            if (isValid && !state.isFeedbackMode) {
+                btn.disabled = false;
+                btn.className = "w-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-400 hover:to-orange-400 text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-pink-200 cursor-pointer transition-all transform hover:scale-[1.02] active:scale-[0.98] text-xl flex justify-center items-center gap-2";
+                btn.innerHTML = '送出答案 <i data-lucide="send" class="w-5 h-5"></i>';
+                lucide.createIcons();
+            } else {
+                btn.disabled = true;
+                btn.className = "hidden"; 
+                if(!state.isFeedbackMode) {
+                     btn.className = "w-full bg-gray-200 text-gray-400 font-bold py-4 px-6 rounded-2xl cursor-not-allowed transition-all text-xl";
+                     btn.innerHTML = '請先選擇或輸入答案';
+                }
+            }
+        }
+
+        // --- 送出答案與回饋 ---
+        function submitAnswer() {
+            const q = questionsData[state.currentQIndex];
+            let isCorrect = false;
+            let answerString = "";
+
+            if (q.type === 'single') {
+                isCorrect = state.selectedSingle === q.correct;
+                answerString = q.options[state.selectedSingle];
+            } else if (q.type === 'multi') {
+                const sortedAns = [...state.selectedMulti].sort();
+                const sortedCor = [...q.correct].sort();
+                isCorrect = JSON.stringify(sortedAns) === JSON.stringify(sortedCor);
+                // 記錄作答內容
+                answerString = state.selectedMulti.map(idx => q.options[idx]).join(", ");
+            } else if (q.type === 'open') {
+                isCorrect = true; // 開放題給過
+                answerString = state.openText;
+            }
+
+            // 【重要】記錄學生這題選了什麼
+            state.answersLog[state.currentQIndex] = answerString;
+
+            if (isCorrect) {
+                state.score++;
+                document.getElementById('score-display').innerText = state.score;
+                const scoreDisplay = document.getElementById('score-display');
+                scoreDisplay.classList.add('scale-125', 'text-yellow-500');
+                setTimeout(() => scoreDisplay.classList.remove('scale-125', 'text-yellow-500'), 300);
+            }
+
+            state.isFeedbackMode = true;
+            renderOptionsUI(); // 鎖定選項
+            updateSubmitButton(); // 隱藏送出按鈕
+
+            // 顯示回饋框
+            const fBox = document.getElementById('feedback-box');
+            const fIcon = document.getElementById('feedback-icon');
+            const fTitle = document.getElementById('feedback-title');
+            const fText = document.getElementById('feedback-text');
+            const btnNext = document.getElementById('btn-next');
+
+            fBox.classList.remove('hidden');
+            fText.innerText = q.explanation;
+
+            if (isCorrect) {
+                fBox.className = "mt-6 p-6 rounded-3xl border-4 fade-in bg-green-50 border-green-200";
+                fIcon.innerHTML = '<i data-lucide="check-circle-2" class="text-green-500 w-8 h-8"></i>';
+                fTitle.className = "font-black text-2xl mb-1 text-green-600";
+                fTitle.innerText = "太棒了，答對囉！ 🎉";
+                btnNext.className = "mt-6 bounce-hover w-full bg-green-500 hover:bg-green-400 text-white font-black py-4 px-4 rounded-2xl shadow-lg shadow-green-200 flex items-center justify-center gap-2 text-xl transition-all";
+            } else {
+                fBox.className = "mt-6 p-6 rounded-3xl border-4 fade-in bg-rose-50 border-rose-200";
+                fIcon.innerHTML = '<i data-lucide="x-circle" class="text-rose-500 w-8 h-8"></i>';
+                fTitle.className = "font-black text-2xl mb-1 text-rose-600";
+                fTitle.innerText = "哎呀，再想想看！ 💡";
+                btnNext.className = "mt-6 bounce-hover w-full bg-rose-500 hover:bg-rose-400 text-white font-black py-4 px-4 rounded-2xl shadow-lg shadow-rose-200 flex items-center justify-center gap-2 text-xl transition-all";
+            }
+
+            if (state.currentQIndex === questionsData.length - 1) {
+                btnNext.innerHTML = '查看最終學習報告 <i data-lucide="award" class="w-6 h-6"></i>';
+            } else {
+                btnNext.innerHTML = '下一關 <i data-lucide="arrow-right" class="w-6 h-6"></i>';
+            }
+
+            lucide.createIcons();
+        }
+
+        // --- 下一題或報表 ---
+        function nextQuestion() {
+            if (state.currentQIndex < questionsData.length - 1) {
+                state.currentQIndex++;
+                loadQuestion(state.currentQIndex);
+            } else {
+                showReport();
+            }
+        }
+
+        // --- 顯示報表 & 傳送資料到 GAS ---
+        function showReport() {
+            document.getElementById('view-quiz').classList.add('hidden');
+            const viewReport = document.getElementById('view-report');
+            viewReport.classList.remove('hidden');
+            
+            document.getElementById('progress-bar').style.width = '100%';
+            document.getElementById('report-score').innerText = state.score;
+
+            // 計算作答總時間 (秒)
+            const endTime = new Date();
+            const durationSeconds = Math.round((endTime - state.startTime) / 1000);
+            const formattedTime = new Date().toLocaleString('zh-TW');
+
+            // 準備要送到 GAS 的資料打包
+            const payload = {
+                timestamp: formattedTime,
+                className: state.student.className,
+                seatNum: state.student.seatNum,
+                name: state.student.name,
+                score: state.score,
+                duration: durationSeconds,
+                answers: state.answersLog
+            };
+
+            // 呼叫 GAS 儲存資料
+            sendDataToGAS(payload);
+
+            let levelTitle = "";
+            let levelDesc = "";
+
+            if (state.score <= 10) {
+                levelTitle = "🔴 表層理解級別";
+                levelDesc = "你已具備基礎概念！下次可以試著多思考：AI 算出的機率，真的等於事實嗎？加油！";
+            } else if (state.score <= 18) {
+                levelTitle = "🟡 實力過渡級別";
+                levelDesc = "很不錯喔！你清楚資料偏差，也能區分機器與人類的責任，未來可多練習設計防護網！";
+            } else {
+                levelTitle = "🟢 批判思考大師";
+                levelDesc = "太神啦！你具備極高的 AI 倫理素養，能深刻反思監控利弊並提出完美保障機制，未來的數位世界靠你守護！";
+            }
+
+            document.getElementById('report-level-title').innerText = levelTitle;
+            document.getElementById('report-level-desc').innerText = levelDesc;
+        }
+
+        // --- 傳送資料到 Google Apps Script ---
+        function sendDataToGAS(payload) {
+            const statusDiv = document.getElementById('cloud-sync-status');
+            
+            if (!GAS_URL || GAS_URL === "請換成你的_GAS_網址") {
+                statusDiv.className = "mt-4 inline-flex items-center gap-2 bg-yellow-50 text-yellow-600 px-4 py-2 rounded-full text-sm font-bold border border-yellow-200";
+                statusDiv.innerHTML = '<i data-lucide="alert-triangle" class="w-4 h-4"></i> 老師尚未設定 GAS 雲端儲存';
+                lucide.createIcons();
+                return;
+            }
+
+            // 使用 no-cors 模式發送 POST 請求，避免跨域阻擋 (但不會有 Response)
+            fetch(GAS_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "text/plain" }, // 使用 text/plain 避免 Preflight
+                body: JSON.stringify(payload)
+            }).then(() => {
+                // UI 變成綠色勾勾
+                statusDiv.className = "mt-4 inline-flex items-center gap-2 bg-green-50 text-green-600 px-4 py-2 rounded-full text-sm font-bold border border-green-200";
+                statusDiv.innerHTML = '<i data-lucide="check-circle-2" class="w-4 h-4"></i> 作答紀錄已安全儲存至雲端！';
+                lucide.createIcons();
+            }).catch(error => {
+                console.error("雲端存檔失敗", error);
+                statusDiv.className = "mt-4 inline-flex items-center gap-2 bg-rose-50 text-rose-600 px-4 py-2 rounded-full text-sm font-bold border border-rose-200";
+                statusDiv.innerHTML = '<i data-lucide="x-circle" class="w-4 h-4"></i> 雲端存檔失敗，請確認網路連線';
+                lucide.createIcons();
+            });
+        }
+
+    </script>
+</body>
+</html>
