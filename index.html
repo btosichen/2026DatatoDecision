@@ -45,13 +45,20 @@
                 </div>
                 <span>AI 素養大挑戰</span>
             </div>
-            <div class="flex bg-amber-100 rounded-2xl p-1.5 shadow-inner">
-                <button id="tab-student" onclick="switchTab('student')" class="px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-md">
-                    <i data-lucide="gamepad-2" class="inline w-4 h-4 mr-1"></i> 學生模式
-                </button>
-                <button id="tab-teacher" onclick="switchTab('teacher')" class="px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all text-amber-700 hover:bg-amber-200">
-                    <i data-lucide="graduation-cap" class="inline w-4 h-4 mr-1"></i> 教師專區
-                </button>
+            <div class="flex items-center gap-2">
+                <!-- 新增：教學簡報快捷鍵 -->
+                <a href="https://btosichen.github.io/2026DatatoDecision/ppt.html" target="_blank" class="px-4 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-purple-100 text-purple-600 hover:bg-purple-200 shadow-sm hidden md:flex items-center gap-1 border-2 border-purple-200 bounce-hover">
+                    <i data-lucide="monitor-play" class="w-4 h-4"></i> 教學簡報
+                </a>
+                
+                <div class="flex bg-amber-100 rounded-2xl p-1.5 shadow-inner">
+                    <button id="tab-student" onclick="switchTab('student')" class="px-4 md:px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-md">
+                        <i data-lucide="gamepad-2" class="inline w-4 h-4 mr-1"></i> 學生模式
+                    </button>
+                    <button id="tab-teacher" onclick="switchTab('teacher')" class="px-4 md:px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all text-amber-700 hover:bg-amber-200">
+                        <i data-lucide="graduation-cap" class="inline w-4 h-4 mr-1"></i> 教師專區
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -321,18 +328,92 @@
                 </div>
             </div>
 
-            <!-- 其他教師區內容保留... -->
-             <div class="bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 rounded-[2.5rem] p-8 md:p-12 shadow-2xl flex flex-col items-center text-center text-white relative overflow-hidden">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 模組架構 -->
+                <div class="bg-white rounded-[2rem] p-8 border-2 border-amber-200 shadow-lg relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 bg-amber-100 w-24 h-24 rounded-full opacity-50"></div>
+                    <div class="flex items-center gap-3 mb-6 relative z-10">
+                        <div class="bg-orange-100 p-2 rounded-xl text-orange-500">
+                            <i data-lucide="layers" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-gray-800">六大闖關模組架構</h3>
+                    </div>
+                    <ul class="space-y-4 text-gray-700 font-medium relative z-10">
+                        <li class="flex justify-between items-center border-b-2 border-amber-50 pb-2">
+                            <span class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-orange-400"></i> 1. 你的數據足跡</span>
+                            <span class="text-sm bg-orange-50 text-orange-600 px-2 py-1 rounded-lg font-bold">認知層次</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b-2 border-amber-50 pb-2">
+                            <span class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-orange-400"></i> 2. 臉部辨識實驗</span>
+                            <span class="text-sm bg-orange-50 text-orange-600 px-2 py-1 rounded-lg font-bold">理解特徵</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b-2 border-amber-50 pb-2">
+                            <span class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-orange-400"></i> 3. 機場監控情境</span>
+                            <span class="text-sm bg-pink-50 text-pink-600 px-2 py-1 rounded-lg font-bold">情境分析</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b-2 border-amber-50 pb-2">
+                            <span class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-orange-400"></i> 4. 資料偏差挑戰</span>
+                            <span class="text-sm bg-pink-50 text-pink-600 px-2 py-1 rounded-lg font-bold">批判思考</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b-2 border-amber-50 pb-2">
+                            <span class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-orange-400"></i> 5. 預測 vs 決策</span>
+                            <span class="text-sm bg-blue-50 text-blue-600 px-2 py-1 rounded-lg font-bold">人機分工</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-orange-400"></i> 6. Safeguards 設計</span>
+                            <span class="text-sm bg-teal-50 text-teal-600 px-2 py-1 rounded-lg font-bold">公民實踐</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 評量機制 -->
+                <div class="bg-white rounded-[2rem] p-8 border-2 border-blue-200 shadow-lg relative overflow-hidden">
+                    <div class="absolute -right-4 -bottom-4 bg-blue-50 w-32 h-32 rounded-full opacity-50"></div>
+                    <div class="flex items-center gap-3 mb-6 relative z-10">
+                        <div class="bg-blue-100 p-2 rounded-xl text-blue-500">
+                            <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-gray-800">自動化素養評量機制</h3>
+                    </div>
+                    <div class="space-y-4 relative z-10">
+                        <div class="bg-rose-50 p-4 rounded-2xl border-l-4 border-rose-400">
+                            <strong class="text-rose-700 block mb-1 text-lg flex items-center gap-2"><i data-lucide="flag" class="w-4 h-4"></i> 🔴 表層理解 (0-10分)</strong>
+                            <span class="text-rose-900/80 text-sm font-medium">具備基礎概念，但對 AI 社會影響缺乏深刻理解。需加強「預測≠事實」。</span>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-2xl border-l-4 border-yellow-400">
+                            <strong class="text-yellow-700 block mb-1 text-lg flex items-center gap-2"><i data-lucide="flag" class="w-4 h-4"></i> 🟡 過渡理解 (11-18分)</strong>
+                            <span class="text-yellow-900/80 text-sm font-medium">清楚資料偏差，能區分機器與人類決策，但防護機制設計尚待深化。</span>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-2xl border-l-4 border-emerald-400">
+                            <strong class="text-emerald-700 block mb-1 text-lg flex items-center gap-2"><i data-lucide="flag" class="w-4 h-4"></i> 🟢 批判思考型 (19-25分)</strong>
+                            <span class="text-emerald-900/80 text-sm font-medium">展現優秀跨領域思維，能自主提出 Safeguards，具備未來公民素養！</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 教材包與教學簡報區塊 -->
+            <div class="bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 rounded-[2.5rem] p-8 md:p-12 shadow-2xl flex flex-col items-center text-center text-white relative overflow-hidden">
                 <i data-lucide="gift" class="absolute top-10 left-10 text-white/20 w-16 h-16 rotate-12"></i>
                 <i data-lucide="file-text" class="absolute bottom-10 right-10 text-white/20 w-20 h-20 -rotate-12"></i>
                 
                 <div class="bg-white/20 p-4 rounded-full mb-6 backdrop-blur-sm border border-white/30">
                     <i data-lucide="share-2" class="w-10 h-10"></i>
                 </div>
-                <h3 class="text-2xl md:text-3xl font-black mb-4">隨插即用！試算表自動連動</h3>
+                <h3 class="text-2xl md:text-3xl font-black mb-4">隨插即用！可複製推廣教材包</h3>
                 <p class="text-white/90 font-medium mb-8 max-w-2xl text-lg">
-                    純前端網頁設計，無需後台安裝，點開連結即可全班互動。系統已設定好 Google Apps Script (GAS)，學生的每一題作答、秒數都會自動匯入老師的 Excel/Sheet 中！
+                    純前端網頁設計，無需後台安裝，點開連結即可全班互動。系統已設定好 Google Apps Script (GAS)，學生的每一題作答、秒數都會自動匯入老師的試算表中！搭配精心設計的互動簡報，讓課程更生動。
                 </p>
+                
+                <!-- 新增：教學簡報超大按鈕 -->
+                <div class="flex flex-col sm:flex-row gap-4 mt-2">
+                    <a href="https://btosichen.github.io/2026DatatoDecision/ppt.html" target="_blank" class="bounce-hover bg-white text-purple-600 font-black py-4 px-8 rounded-full shadow-xl flex items-center justify-center gap-3 text-lg hover:bg-purple-50">
+                        <i data-lucide="monitor-play" class="w-6 h-6 text-purple-500"></i> 開啟互動教學簡報
+                    </a>
+                    <button class="bounce-hover bg-purple-600/50 hover:bg-purple-600 text-white border-2 border-white/40 font-black py-4 px-8 rounded-full shadow-lg flex items-center justify-center gap-3 text-lg transition-colors">
+                        <i data-lucide="download-cloud" class="w-6 h-6"></i> 下載教案 PDF
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -342,7 +423,7 @@
         // ==========================================
         // 老師注意：請把下方的字串換成你的 GAS 網頁應用程式 URL
         // ==========================================
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbwJLt0QZVAhILui0O-rku0ZEuZ1sv8bIAtEDLqBM3tYLWFRSPeYrP0fE0UTSuHPXcpp/exec"; 
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbwvFKNbpBGwZWIn331uzeB1i3z9-lRNP7IGlZpFnv_rXxnU7GE8B2KV1M_DqEsl67zw5w/exec"; 
         
         // --- 資料庫：25題完整題目 ---
         const questionsData = [
@@ -408,11 +489,11 @@
             // 隱藏所有視圖
             views.forEach(v => document.getElementById(v).classList.add('hidden'));
 
-            btnStudent.className = "px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all text-amber-700 hover:bg-amber-200";
-            btnTeacher.className = "px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all text-amber-700 hover:bg-amber-200";
+            btnStudent.className = "px-4 md:px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all text-amber-700 hover:bg-amber-200";
+            btnTeacher.className = "px-4 md:px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all text-amber-700 hover:bg-amber-200";
 
             if (tab === 'student') {
-                btnStudent.className = "px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-md";
+                btnStudent.className = "px-4 md:px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-gradient-to-r from-orange-400 to-pink-500 text-white shadow-md";
                 
                 // 狀態機判斷目前在哪一頁
                 if (state.currentQIndex === 0 && state.score === 0 && !state.student.name) {
@@ -423,7 +504,7 @@
                     document.getElementById('view-quiz').classList.remove('hidden');
                 }
             } else {
-                btnTeacher.className = "px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-gradient-to-r from-teal-400 to-blue-500 text-white shadow-md";
+                btnTeacher.className = "px-4 md:px-5 py-2 rounded-xl text-sm md:text-base font-bold transition-all bg-gradient-to-r from-teal-400 to-blue-500 text-white shadow-md";
                 document.getElementById('view-teacher').classList.remove('hidden');
             }
         }
