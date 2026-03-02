@@ -17,6 +17,7 @@
             --text-dark: #1e293b;
             --text-muted: #475569;
             --white: #ffffff;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
         * {
@@ -29,11 +30,10 @@
             padding: 0;
             height: 100%;
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #e2e8f0;
+            background-color: #f1f5f9;
             overflow: hidden;
         }
 
-        /* 應用程式容器 */
         #app {
             width: 100%;
             height: 100%;
@@ -42,7 +42,6 @@
             position: relative;
         }
 
-        /* 幻燈片容器 */
         .slides-wrapper {
             flex-grow: 1;
             position: relative;
@@ -65,216 +64,255 @@
             opacity: 0;
             transform: translateX(100%);
             z-index: 1;
+            text-align: center;
         }
 
-        .slide.active {
-            opacity: 1;
-            transform: translateX(0);
-            z-index: 2;
-        }
+        .slide.active { opacity: 1; transform: translateX(0); z-index: 2; }
+        .slide.prev { transform: translateX(-100%); }
 
-        .slide.prev {
-            transform: translateX(-100%);
-        }
-
-        /* 裝飾背景 */
+        /* 3D 質感裝飾背景 */
         .slide::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background: 
-                radial-gradient(circle at 10% 10%, rgba(0,112,243,0.03) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(157,0,255,0.03) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(0,112,243,0.05) 0%, transparent 35%),
+                radial-gradient(circle at 85% 85%, rgba(157,0,255,0.05) 0%, transparent 35%);
             z-index: -1;
         }
 
-        /* 小標誌 */
         .corner-logo {
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 18px;
+            font-size: 16px;
             color: var(--primary-blue);
             background: white;
-            padding: 8px 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-weight: 700;
         }
 
-        /* 文字大小優化 */
-        h1 { font-size: clamp(40px, 8vw, 70px); font-weight: 900; margin: 0; color: var(--text-dark); line-height: 1.2; text-align: center; }
+        h1 { font-size: clamp(36px, 7vw, 65px); font-weight: 900; margin: 0; color: var(--text-dark); line-height: 1.2; letter-spacing: -1px; }
         h1 span { color: var(--primary-blue); }
         
         .slide-title {
-            font-size: clamp(28px, 5vw, 44px);
+            font-size: clamp(24px, 4vw, 40px);
             font-weight: 900;
             color: var(--text-dark);
-            margin-bottom: 30px;
-            border-left: 8px solid var(--accent-purple);
-            padding-left: 15px;
-            align-self: flex-start;
+            margin-bottom: 25px;
+            text-align: left;
             width: 100%;
+            max-width: 1050px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .slide-title::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--accent-purple));
+            border-radius: 10px;
         }
 
-        p { font-size: clamp(18px, 3vw, 26px); color: var(--text-muted); line-height: 1.6; max-width: 900px; }
-        
-        .subtitle { font-size: clamp(22px, 4vw, 32px); color: var(--accent-purple); font-weight: 700; margin: 15px 0; }
+        p { font-size: clamp(18px, 2.5vw, 24px); color: var(--text-muted); line-height: 1.6; max-width: 850px; margin-left: auto; margin-right: auto; }
+        .subtitle { font-size: clamp(20px, 3.5vw, 30px); color: var(--accent-purple); font-weight: 700; margin: 10px 0; }
 
-        /* 佈局 */
         .content-container {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1050px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
+            text-align: left;
         }
 
         .two-column {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
             align-items: center;
         }
 
-        @media (max-width: 768px) {
-            .two-column { grid-template-columns: 1fr; }
-            .slide { padding: 20px; }
+        @media (max-width: 850px) {
+            .two-column { grid-template-columns: 1fr; text-align: center; }
+            .slide-title { justify-content: center; text-align: center; }
+            .slide-title::before { display: none; }
+            .content-container { text-align: center; }
         }
 
-        .image-box {
+        /* CGI 卡通插圖占位符 */
+        .cgi-illustration {
             width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: var(--card-shadow);
             border: 4px solid white;
+            overflow: hidden;
         }
 
-        .image-box img { width: 100%; height: auto; display: block; }
+        .cgi-illustration .main-icon {
+            font-size: 100px;
+            filter: drop-shadow(0 10px 15px rgba(0,112,243,0.2));
+            margin-bottom: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .cgi-illustration .overlay-dots {
+            position: absolute;
+            width: 100%; height: 100%;
+            background-image: radial-gradient(var(--primary-blue) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        .illustration-tag {
+            background: var(--primary-blue);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
 
         /* 導覽列 */
         .nav-bar {
-            height: 70px;
+            height: 80px;
             background: var(--white);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            padding: 0 40px;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.05);
             z-index: 100;
         }
-
-        .nav-buttons { display: flex; gap: 15px; }
 
         .nav-btn {
             background: var(--primary-blue);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 12px 25px;
+            border-radius: 15px;
             font-weight: 700;
+            font-size: 18px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
-        .nav-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,112,243,0.3); }
-
-        .progress-text { font-weight: 700; color: var(--text-muted); }
-
-        /* 卡片與平舖 */
-        .tile-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
-        }
+        .nav-btn:disabled { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; }
+        .nav-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,112,243,0.3); background: #0061d1; }
 
         .tile {
             background: white;
             padding: 25px;
-            border-radius: 20px;
+            border-radius: 25px;
+            box-shadow: var(--card-shadow);
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-            border-bottom: 5px solid var(--primary-blue);
+            border: 2px solid transparent;
+            transition: 0.3s;
         }
-
+        .tile:hover { border-color: var(--primary-blue); transform: translateY(-5px); }
         .tile i { font-size: 40px; color: var(--highlight-orange); margin-bottom: 15px; }
-        .tile h3 { font-size: 24px; margin: 10px 0; color: var(--text-dark); }
-        .tile p { font-size: 18px; margin: 0; }
+        .tile h3 { font-size: 22px; margin: 10px 0; color: var(--text-dark); font-weight: 900; }
+        .tile p { font-size: 18px; color: var(--text-muted); }
 
-        /* 按鈕連結 */
         .action-link {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            gap: 15px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-purple) 100%);
             color: white;
             text-decoration: none;
-            padding: 15px 35px;
+            padding: 20px 45px;
             border-radius: 50px;
-            font-size: clamp(20px, 4vw, 28px);
+            font-size: 26px;
             font-weight: 900;
-            box-shadow: 0 10px 25px rgba(0,112,243,0.3);
+            box-shadow: 0 15px 35px rgba(0,112,243,0.4);
             margin-top: 20px;
-            transition: transform 0.3s;
+            transition: 0.3s;
         }
+        .action-link:hover { transform: scale(1.05) translateY(-5px); }
 
-        .action-link:hover { transform: scale(1.05); }
-
-        /* 特殊元件 */
         .highlight-box {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 24px;
-            border-left: 10px solid var(--highlight-orange);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            background: #fff;
+            padding: 25px;
+            border-radius: 20px;
+            border-left: 8px solid var(--highlight-orange);
+            box-shadow: var(--card-shadow);
         }
 
-        .big-stat { font-size: 100px; font-weight: 900; color: var(--highlight-orange); line-height: 1; margin: 10px 0; }
+        .stat-circle {
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            border: 8px solid #f1f5f9;
+            box-shadow: var(--card-shadow);
+        }
+        .big-stat { font-size: 60px; font-weight: 900; color: var(--highlight-orange); line-height: 1; }
 
     </style>
 </head>
 <body>
 
 <div id="app">
-    <!-- 頂部顯示當前標題 -->
-    <div id="top-indicator" style="position: absolute; top: 20px; left: 40px; font-weight: 700; color: var(--primary-blue); z-index: 10;">
-        AI 素養普及計畫
-    </div>
-
     <div class="slides-wrapper" id="slides-container">
         <!-- Slide 1: 封面 -->
         <div class="slide active" id="slide-0">
-            <div class="corner-logo"><i class="fa-solid fa-microchip"></i><span>科技導論</span></div>
+            <div class="corner-logo"><i class="fa-solid fa-wand-sparkles"></i><span>AI 素養系列課程</span></div>
             <h1>From <span>Data</span> to Decision</h1>
             <p class="subtitle">AI、監控與人類責任</p>
-            <div class="image-box" style="max-width: 600px; margin-top: 20px;">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/14407657581894037094" alt="AI 視覺插圖">
+            
+            <div class="cgi-illustration" style="max-width: 500px; margin: 30px auto;">
+                <div class="overlay-dots"></div>
+                <div class="main-icon">🤖</div>
+                <div class="illustration-tag">CGI: 正在思考大數據的小機器人</div>
             </div>
-            <p style="text-align: center; margin-top: 20px; font-weight: 700;">探索 AI 如何從數據中學習並做出影響現實的決定。</p>
+            
+            <p style="font-weight: 700; color: var(--text-dark);">在這個演算法時代，讓我們看穿機器的「大腦」</p>
         </div>
 
         <!-- Slide 2: 核心提問 -->
         <div class="slide" id="slide-1">
-            <h2 class="slide-title">一個令人困惑的問題</h2>
+            <h2 class="slide-title">核心挑戰：機器的眼光</h2>
             <div class="content-container">
                 <div class="two-column">
                     <div>
-                        <p style="font-weight: 900; color: var(--highlight-orange); font-size: 36px;">如果 AI 說你是嫌疑人，<br>且信心達 99%...</p>
-                        <p style="font-size: 42px; font-weight: 900; margin: 20px 0;">你會相信它嗎？</p>
-                        <div class="highlight-box" style="margin-top: 20px;">
-                            <p style="font-size: 20px; margin: 0;">💡 請先記住你的答案，看完這個 Web App 之後，我們再來重新評估。</p>
+                        <p style="font-weight: 900; color: var(--highlight-orange); font-size: 32px; line-height: 1.3;">若機場 AI 判定你是嫌疑人，<br>且信心指數高達 99.8%...</p>
+                        <p style="font-size: 42px; font-weight: 900; margin: 25px 0; color: var(--text-dark);">你會「無條件」服從嗎？</p>
+                        <div class="highlight-box">
+                            <p style="font-size: 20px; margin: 0;">🤔 <b>反思：</b>機器的「信心度」代表的是真實，還是只是數字？</p>
                         </div>
                     </div>
-                    <div class="image-box">
-                        <img src="http://googleusercontent.com/image_collection/image_retrieval/4117830820816190498" alt="監控掃描畫面">
+                    <div class="cgi-illustration">
+                        <div class="overlay-dots"></div>
+                        <div class="main-icon">🔍</div>
+                        <div class="illustration-tag">CGI: 正在掃描人潮特徵的可愛攝影機</div>
                     </div>
                 </div>
             </div>
@@ -282,44 +320,55 @@
 
         <!-- Slide 3: AI 的學習本質 -->
         <div class="slide" id="slide-2">
-            <h2 class="slide-title">AI 不是理解你，而是在「找規律」</h2>
+            <h2 class="slide-title">AI 是如何養成的？</h2>
             <div class="content-container">
-                <div class="tile-grid">
-                    <div class="tile">
-                        <i class="fa-solid fa-database"></i>
-                        <h3>資料 (Data)</h3>
-                        <p>海量的原始訊息，是 AI 的糧食。</p>
+                <div class="two-column">
+                    <div class="cgi-illustration">
+                        <div class="overlay-dots"></div>
+                        <div class="main-icon">⛽</div>
+                        <div class="illustration-tag">CGI: 將數據方塊當作燃料注入機器</div>
                     </div>
-                    <div class="tile">
-                        <i class="fa-solid fa-gears"></i>
-                        <h3>演算法 (Algorithm)</h3>
-                        <p>在混亂數據中尋找固定的模式。</p>
-                    </div>
-                    <div class="tile">
-                        <i class="fa-solid fa-bullseye"></i>
-                        <h3>預測 (Prediction)</h3>
-                        <p>根據規律給出最可能的答案。</p>
+                    <div class="tile-grid" style="grid-template-columns: 1fr; gap: 15px;">
+                        <div class="tile" style="display: flex; align-items: center; gap: 20px; text-align: left; padding: 20px;">
+                            <i class="fa-solid fa-cubes"></i>
+                            <div>
+                                <h3>海量數據</h3>
+                                <p>AI 閱讀數百萬張照片來學習如何「辨識」。</p>
+                            </div>
+                        </div>
+                        <div class="tile" style="display: flex; align-items: center; gap: 20px; text-align: left; padding: 20px;">
+                            <i class="fa-solid fa-brain"></i>
+                            <div>
+                                <h3>模式識別</h3>
+                                <p>機器只負責找出規律，不負責理解對錯。</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="highlight-box" style="border-left-color: var(--accent-purple); text-align: center; margin-top: 20px;">
-                    <p style="font-weight: 700; margin: 0;">關鍵點：AI 處理的是機率，而不是真正的「認知」。</p>
+                <div class="highlight-box" style="border-left-color: var(--accent-purple); text-align: center;">
+                    <p style="font-weight: 900; color: var(--accent-purple); margin: 0;">記住：AI 只是在玩一場超級複雜的「機率遊戲」。</p>
                 </div>
             </div>
         </div>
 
         <!-- Slide 4: 偏差的來源 -->
         <div class="slide" id="slide-3">
-            <h2 class="slide-title">偏差（Bias）是從哪裡來的？</h2>
+            <h2 class="slide-title">當偏見進入了機器腦</h2>
             <div class="content-container">
                 <div class="two-column">
                     <div style="text-align: center;">
-                        <p style="font-weight: 700;">如果訓練數據中：</p>
-                        <div class="big-stat">95%</div>
-                        <p style="font-weight: 900; color: var(--accent-purple);">都是特定族群的臉</p>
+                        <p style="font-weight: 700; color: var(--text-dark);">如果訓練樣本中：</p>
+                        <div class="stat-circle">
+                            <span class="big-stat">95%</span>
+                            <span style="font-weight: 700; color: var(--text-muted);">主流特徵</span>
+                        </div>
+                        <p style="font-weight: 900; color: var(--accent-purple); font-size: 28px; margin-top: 15px;">AI 會遺忘剩下的 5%</p>
                     </div>
-                    <div class="highlight-box">
-                        <p style="font-weight: 700; color: var(--highlight-orange); margin-top: 0;">演算法偏見：</p>
-                        <p style="font-size: 22px;">如果 AI 從沒看過你的特徵，它就更容易發生誤判。這並非 AI 的本意，而是它接觸的「世界」不夠完整。</p>
+                    <div class="cgi-illustration">
+                        <div class="overlay-dots"></div>
+                        <div class="main-icon">🎨</div>
+                        <div class="illustration-tag">CGI: 各色人物方塊但顏色分佈不均</div>
+                        <p style="padding: 10px; font-size: 16px; color: var(--text-muted); text-align: center;">當 AI 沒見過多樣性，它的結論就會產生「偏心」。</p>
                     </div>
                 </div>
             </div>
@@ -327,48 +376,47 @@
 
         <!-- Slide 5: 預測與決策 -->
         <div class="slide" id="slide-4">
-            <h2 class="slide-title">關鍵區分：預測 ≠ 決策</h2>
+            <h2 class="slide-title">誰才是最後的裁判？</h2>
             <div class="content-container">
-                <div class="two-column" style="gap: 40px;">
-                    <div class="tile" style="border-bottom-color: var(--accent-purple); background: #fdfaff;">
-                        <i class="fa-solid fa-robot" style="color: var(--accent-purple);"></i>
-                        <h3>AI 負責「預測」</h3>
-                        <p>計算機率：<br>「他是嫌疑人的機率很高。」</p>
+                <div class="two-column" style="gap: 30px;">
+                    <div class="tile" style="border-bottom: 8px solid var(--accent-purple);">
+                        <div style="font-size: 50px; margin-bottom: 10px;">📉</div>
+                        <h3>機器：預測</h3>
+                        <p>「根據數據，他是嫌疑人的機率是 85%。」</p>
                     </div>
-                    <div class="tile" style="border-bottom-color: var(--highlight-orange); background: #fffdfa;">
-                        <i class="fa-solid fa-user-shield" style="color: var(--highlight-orange);"></i>
-                        <h3>人類負責「決策」</h3>
-                        <p>考慮後果與正義：<br>「我決定是否採取行動。」</p>
-                    </div>
-                </div>
-                <div class="image-box" style="height: 120px; border: none; background: transparent; box-shadow: none; margin-top: 20px;">
-                    <div style="display: flex; justify-content: center; align-items: center; height: 100%; font-size: 40px; color: var(--text-muted);">
-                        <i class="fa-solid fa-arrow-right"></i>
+                    <div class="tile" style="border-bottom: 8px solid var(--highlight-orange);">
+                        <div style="font-size: 50px; margin-bottom: 10px;">👨‍⚖️</div>
+                        <h3>人類：決策</h3>
+                        <p>「我檢視細節，決定不應僅憑數據逮捕。」</p>
                     </div>
                 </div>
-                <p style="text-align: center; font-weight: 900; color: var(--primary-blue);">我們不能把「責任」也交給演算法。</p>
+                <div class="cgi-illustration" style="height: 200px; aspect-ratio: auto;">
+                    <div class="overlay-dots"></div>
+                    <div class="main-icon" style="font-size: 60px;">🤝</div>
+                    <div class="illustration-tag">CGI: 人類手掌與機器手臂擊掌 (合作模式)</div>
+                    <p style="font-weight: 900; color: var(--primary-blue); margin: 0; font-size: 22px;">AI 提供參考，人類承擔責任。</p>
+                </div>
             </div>
         </div>
 
         <!-- Slide 6: 學習單任務 -->
         <div class="slide" id="slide-5">
-            <div class="corner-logo"><i class="fa-solid fa-scale-balanced"></i><span>最後任務</span></div>
-            <h2 class="slide-title">課後任務與回饋</h2>
+            <h2 class="slide-title">實踐時間：挑戰 Verysafeland</h2>
             <div class="content-container" style="text-align: center;">
-                <div class="highlight-box" style="border-left: none; border-top: 8px solid var(--primary-blue); padding: 50px;">
-                    <p style="font-size: 32px; font-weight: 900; color: var(--text-dark); margin-bottom: 10px;">🎯 完成挑戰學習單</p>
-                    <p style="font-size: 22px; color: var(--text-muted); margin-bottom: 30px;">
-                        請點擊下方按鈕，運用今天學到的概念<br>分析 Verysafeland 機場的案例。
+                <div class="highlight-box" style="border-left: none; border-top: 10px solid var(--primary-blue); padding: 40px;">
+                    <div class="main-icon" style="font-size: 70px; margin-bottom: 20px;">🏆</div>
+                    <p style="font-size: 32px; font-weight: 900; color: var(--text-dark); margin-bottom: 15px;">🎯 請與同學討論並寫下</p>
+                    <p style="font-size: 20px; color: var(--text-muted); margin-bottom: 30px;">
+                        如果你是機場的管理者，你會如何調整這套 AI 系統？<br>點擊下方按鈕，開始你的深度分析。
                     </p>
                     
                     <a href="https://docs.google.com/document/d/1mCsw9NfIgbXFT3dPbw0w3S-k54Vku-sQ/edit?usp=sharing&ouid=104546515696060670125&rtpof=true&sd=true" class="action-link" target="_blank">
-                        <i class="fa-solid fa-file-signature"></i> 點此開啟「學習單」
+                        <i class="fa-solid fa-file-pen"></i> 開啟學習單
                     </a>
                 </div>
                 
-                <p style="margin-top: 30px; font-weight: 700; color: var(--text-muted);">
-                    謝謝觀看！保持好奇，持續反思。<br>
-                    <span style="font-size: 16px;">AI 素養普及計畫 | 教學用 Web App</span>
+                <p style="margin-top: 30px; font-weight: 700; color: var(--text-muted); opacity: 0.6;">
+                    [ AI 素養教育計畫 - 2024 版 ]
                 </p>
             </div>
         </div>
@@ -376,15 +424,15 @@
 
     <!-- 導覽列 -->
     <div class="nav-bar">
-        <div class="progress-text">
-            頁面 <span id="current-page">1</span> / <span id="total-pages">6</span>
+        <div style="font-weight: 900; color: var(--text-muted); font-size: 18px;">
+            探索進度 <span id="current-page" style="color: var(--primary-blue);">1</span> / 6
         </div>
-        <div class="nav-buttons">
-            <button class="nav-btn" id="prev-btn" disabled>
-                <i class="fa-solid fa-chevron-left"></i> 上一頁
+        <div class="nav-buttons" style="display: flex; gap: 15px;">
+            <button class="nav-btn" id="prev-btn" style="background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue);" disabled>
+                <i class="fa-solid fa-chevron-left"></i> 上一單元
             </button>
             <button class="nav-btn" id="next-btn">
-                下一頁 <i class="fa-solid fa-chevron-right"></i>
+                下一單元 <i class="fa-solid fa-chevron-right"></i>
             </button>
         </div>
     </div>
@@ -395,12 +443,9 @@
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     const currentPageText = document.getElementById('current-page');
-    const totalPagesText = document.getElementById('total-pages');
     
     let currentIndex = 0;
     const totalSlides = slides.length;
-    
-    totalPagesText.innerText = totalSlides;
 
     function updateSlides() {
         slides.forEach((slide, index) => {
@@ -412,13 +457,12 @@
             }
         });
 
-        // 更新按鈕狀態
         prevBtn.disabled = currentIndex === 0;
         
         if (currentIndex === totalSlides - 1) {
-            nextBtn.innerHTML = '重新開始 <i class="fa-solid fa-rotate-right"></i>';
+            nextBtn.innerHTML = '重新回顧 <i class="fa-solid fa-rotate-right"></i>';
         } else {
-            nextBtn.innerHTML = '下一頁 <i class="fa-solid fa-chevron-right"></i>';
+            nextBtn.innerHTML = '下一單元 <i class="fa-solid fa-chevron-right"></i>';
         }
 
         currentPageText.innerText = currentIndex + 1;
@@ -428,7 +472,7 @@
         if (currentIndex < totalSlides - 1) {
             currentIndex++;
         } else {
-            currentIndex = 0; // 循環回到第一頁
+            currentIndex = 0; 
         }
         updateSlides();
     });
@@ -440,33 +484,19 @@
         updateSlides();
     });
 
-    // 支援鍵盤左右鍵控制
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ') {
-            nextBtn.click();
-        } else if (e.key === 'ArrowLeft') {
-            prevBtn.click();
-        }
+        if (e.key === 'ArrowRight' || e.key === ' ') nextBtn.click();
+        if (e.key === 'ArrowLeft') prevBtn.click();
     });
 
-    // 支援滑動手勢
     let touchstartX = 0;
-    let touchendX = 0;
-    
-    function handleGesture() {
-        if (touchendX < touchstartX - 50) nextBtn.click();
-        if (touchendX > touchstartX + 50) prevBtn.click();
-    }
-
-    document.getElementById('slides-container').addEventListener('touchstart', e => {
-        touchstartX = e.changedTouches[0].screenX;
+    const container = document.getElementById('slides-container');
+    container.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
+    container.addEventListener('touchend', e => {
+        let touchendX = e.changedTouches[0].screenX;
+        if (touchendX < touchstartX - 60) nextBtn.click();
+        if (touchendX > touchstartX + 60) prevBtn.click();
     });
-
-    document.getElementById('slides-container').addEventListener('touchend', e => {
-        touchendX = e.changedTouches[0].screenX;
-        handleGesture();
-    });
-
 </script>
 
 </body>
