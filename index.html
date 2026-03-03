@@ -435,7 +435,7 @@
             
             { id: 6, module: 2, type: "single", icon: "scan-face", cardTitle: "信心值迷思", question: "判斷題：當 AI 的臉部辨識系統顯示「信心值 99%」時，代表它絕對不可能認錯人。", options: ["正確", "錯誤"], correct: 1, explanation: "錯誤！99% 只是 AI 主觀認為自己正確的機率，若訓練資料有缺陷，AI 會「非常有自信地犯錯」。" },
             { id: 7, module: 2, type: "single", icon: "server", cardTitle: "訓練資料偏少", question: "情境分析：如果某 AI 系統只看過「成年人」的照片來學習，當辨識「國中生」時，準確率會如何？", options: ["一樣準確，因為都是人類", "大幅下降，因為它沒有學習過青少年的特徵", "會變更高，因為小孩的臉比較簡單", "系統會直接當機"], correct: 1, explanation: "AI 只能依賴它看過的「訓練資料」來建立模式。沒看過的特徵，它就無法準確預測。" },
-            { id: 8, module: 2, type: "single", icon: "brain-circuit", cardTitle: "AI 學習四部曲", question: "請選出 AI 學習臉部辨識的正確順序：\n(B)收集照片 -> (D)標註特徵 -> (C)找數學模式 -> (A)進行預測", options: ["B, D, C, A (正確順序)", "A, B, C, D", "C, B, D, A", "B, C, D, A"], correct: 0, explanation: "AI 訓練流程：收集資料(B) -> 標註資料(D) -> 尋找模式(C) -> 應用預測(A)。" },
+            { id: 8, module: 2, type: "single", icon: "brain-circuit", cardTitle: "AI 學習四部曲", question: "請選出 AI 學習臉部辨識的正確順序：\n(A)進行預測、(B)收集照片、(C)找數學模式、(D)標註特徵", options: ["B, D, C, A", "A, B, C, D", "C, B, D, A", "B, C, D, A"], correct: 0, explanation: "AI 訓練流程：收集資料(B) -> 標註資料(D) -> 尋找模式(C) -> 應用預測(A)。" },
             { id: 9, module: 2, type: "single", icon: "alert-triangle", cardTitle: "族群辨識差異", question: "為什麼某些 AI 系統在辨識「特定膚色或性別」時，特別容易出錯？", options: ["因為 AI 故意歧視", "因為工程師寫錯程式", "因為訓練資料庫中，該族群的照片比例太少", "因為相機拍不清楚"], correct: 2, explanation: "這稱為「代表性不足」。當資料庫缺乏多樣性，AI 就無法準確辨識少數群體。" },
             { id: 10, module: 2, type: "single", icon: "user-x", cardTitle: "特徵盲點", question: "資料庫五個人只有一個戴眼鏡。如果 AI 把「戴眼鏡」當成犯罪特徵，這說明了什麼？", options: ["AI 擁有超越人類的洞察力", "AI 會盲目找出數據間的「假性相關」導致錯誤", "AI 討厭戴眼鏡的人", "證明戴眼鏡真的很危險"], correct: 1, explanation: "AI 擅長找規律，但不懂「因果關係」。它可能會把隨機的巧合（如戴眼鏡）當成絕對標準。" },
 
