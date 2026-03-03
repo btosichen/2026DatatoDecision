@@ -260,6 +260,44 @@
             font-weight: 700;
         }
 
+        /* 臺灣生活案例區塊樣式 (新增) */
+        .tw-example-box {
+            background-color: #fffbeb; /* 淡黃色背景 */
+            border-left: 8px solid #fbc02d;
+            border-radius: 12px;
+            padding: 15px 25px;
+            margin-top: auto; /* 將區塊推到底部 */
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+        .tw-example-box i {
+            color: #fbc02d;
+            font-size: 36px;
+        }
+        .tw-example-box-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+        .tw-example-box-content h4 {
+            color: #f57f17;
+            font-size: 22px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+        .tw-example-box-content .desc {
+            color: #333; /* 避免暗色背景影響閱讀 */
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
         /* 教師講稿區域 (可選隱藏) */
         .speaker-notes {
             display: none;
@@ -285,10 +323,19 @@
         <div class="slide-content flex-center">
             <h1 class="cover-title">From <span style="color:var(--tech-blue)">Data</span> to Decision</h1>
             <p class="cover-subtitle">AI、監控與人類責任</p>
-            <div style="margin-top: 50px; width: 60%; height: 300px; background: #ddd; border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <div style="margin-top: 30px; width: 60%; height: 280px; background: #ddd; border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                 <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1280" alt="AI科技插圖" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
-            <p style="margin-top: 30px; font-size: 24px; font-weight: 700;">AI 是怎麼從資料走到決策的？</p>
+            <p style="margin-top: 20px; margin-bottom: 20px; font-size: 24px; font-weight: 700;">AI 是怎麼從資料走到決策的？</p>
+            
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-lightbulb"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">📌 <strong>想一想：</strong>從 IG 推薦影片、YouTube 演算法，到捷運悠遊卡紀錄，我們的生活其實都在「被資料化」。</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -307,6 +354,15 @@
                     <i class="fas fa-user-secret" style="font-size: 250px; color: #cbd5e1;"></i>
                 </div>
             </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-location-dot"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">💡 <strong>生活例子：</strong>如果你在捷運站出入紀錄異常、校園門禁刷卡顯示你在不該出現的地方，或網購平台誤判你是詐騙帳號... 99% 信心，你會服氣嗎？</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -321,10 +377,19 @@
                 <div class="tile"><i class="fas fa-wifi"></i><h3>公共 WiFi</h3><p>你連過車站或超商的免費網路嗎？</p></div>
                 <div class="tile"><i class="fas fa-birthday-cake"></i><h3>公開生日</h3><p>你的社群帳號有寫出真實生日嗎？</p></div>
             </div>
-            <div style="margin-top: 50px;">
+            <div style="margin-top: 30px;">
                 <p style="font-size: 24px; font-weight: 700;">你的「資料足跡」計分條：</p>
                 <div class="progress-container"><div class="progress-bar"></div></div>
                 <p style="text-align: right; color: var(--neon-purple); font-weight: 700;">已產生大量個人特徵數據</p>
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-mobile-screen"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">你有用 LINE 登入其他網站嗎？有用 iPass / 悠遊卡嗎？用 foodpanda / UberEats 嗎？看抖音或 IG Reels 嗎？<br><span style="color:var(--tech-blue)">➡ 這些都在產生「可分析資料」！</span></div>
+                </div>
             </div>
         </div>
     </div>
@@ -343,8 +408,17 @@
                 <i class="fas fa-arrow-right flow-arrow"></i>
                 <div class="flow-item" style="border-color: var(--neon-purple);"><i class="fas fa-crystal-ball" style="font-size:40px; color:var(--neon-purple)"></i><p>預測</p></div>
             </div>
-            <div class="highlight-box" style="margin-top: 60px; text-align: center;">
+            <div class="highlight-box" style="margin-top: 40px; text-align: center;">
                 <strong>核心概念：</strong> AI 不是真的「理解」你，它只是在資料中「找規律」。
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-play-circle"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">📌 Netflix 為什麼推薦你韓劇？ 📌 YouTube 為什麼一直推你遊戲影片？ 📌 蝦皮為什麼猜你會買鍵盤？<br>👉 <strong>不是因為懂你，而是因為「找規律」。</strong></div>
+                </div>
             </div>
         </div>
     </div>
@@ -368,6 +442,15 @@
                     </li>
                 </ul>
             </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-expand"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">📱 像是手機 Face ID、校園刷臉點名、部分社區大樓門禁系統。<br>強調：它不是「認你是誰」，而是「比對數據相似度」。</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -377,15 +460,24 @@
         <div class="slide-content">
             <h2 class="slide-title">錯誤是怎麼發生的？</h2>
             <div class="grid-2" style="gap: 30px;">
-                <div class="tile" style="height: 350px; display: flex; flex-direction: column; justify-content: center;">
+                <div class="tile" style="height: 320px; display: flex; flex-direction: column; justify-content: center;">
                     <i class="fas fa-user-xmark" style="font-size: 60px;"></i>
                     <h3 style="font-size: 32px; color: var(--bright-orange);">偽陽性 (False Positive)</h3>
                     <p style="font-size: 22px;">AI 說你是嫌疑犯，但你明明是好人。<br><strong>(抓錯人)</strong></p>
                 </div>
-                <div class="tile" style="height: 350px; display: flex; flex-direction: column; justify-content: center;">
+                <div class="tile" style="height: 320px; display: flex; flex-direction: column; justify-content: center;">
                     <i class="fas fa-user-check" style="font-size: 60px; color: var(--tech-blue);"></i>
                     <h3 style="font-size: 32px; color: var(--tech-blue);">偽陰性 (False Negative)</h3>
                     <p style="font-size: 22px;">壞人經過了，AI 卻說他是安全的。<br><strong>(漏掉人)</strong></p>
+                </div>
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-ticket"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">🔴 <strong>False Positive:</strong> 科技執法 AI 誤認你闖紅燈 → 罰單寄到家！<br>🔵 <strong>False Negative:</strong> 有人冒用你的臉部辨識過社區門禁 → 卻沒被抓到！</div>
                 </div>
             </div>
         </div>
@@ -400,7 +492,16 @@
                 <p style="font-size: 32px; margin-bottom: 20px;">如果 AI 只有看過「本地臉孔」的人...</p>
                 <p style="font-size: 40px; font-weight: 900; color: var(--bright-orange);">如果它沒看過你這種臉型呢？</p>
             </div>
-            <p style="margin-top: 40px; font-size: 24px; color: var(--gray-text);">這就是「演算法偏見」的起點。</p>
+            <p style="margin-top: 30px; font-size: 24px; color: var(--gray-text);">這就是「演算法偏見」的起點。</p>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-cloud-moon-rain"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">如果系統主要訓練：成人臉孔、某些族群、某種光線條件...<br>那麼在臺灣的<strong>夜市光線</strong>或<strong>下雨天騎車</strong>時，會不會嚴重影響辨識成功率？</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -414,7 +515,16 @@
                 歡迎來到 Verysafeland！這是一個強調「絕對安全」的國家。<br>
                 每一位旅客在入境時，AI 都會根據大數據算出一個「嫌疑分數」。
             </div>
-            <i class="fas fa-plane-arrival" style="font-size: 120px; margin-top: 40px;"></i>
+            <i class="fas fa-plane-arrival" style="font-size: 100px; margin-top: 20px;"></i>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box" style="background-color: #fffbeb; color: var(--dark-text);">
+                <i class="fas fa-train"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">✈️ 假設這是在<strong>桃園機場</strong>或<strong>高鐵站</strong>，AI 正在即時分析你的：<br>行動支付紀錄、行動電話定位、LINE 對話紀錄...</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -422,11 +532,20 @@
     <div class="slide" id="slide9">
         <div class="corner-logo"><i class="fas fa-microchip"></i></div>
         <div class="slide-content flex-center">
-            <h2 style="font-size: 50px; margin-bottom: 20px;">Alex 被攔下了！</h2>
-            <div class="big-number">99%</div>
+            <h2 style="font-size: 50px; margin-bottom: 10px;">Alex 被攔下了！</h2>
+            <div class="big-number" style="font-size: 130px;">99%</div>
             <p style="font-size: 40px; font-weight: 900; color: var(--dark-text);">AI 判定信心指數：99%</p>
-            <div class="highlight-box" style="margin-top: 40px; width: 80%; border-color: var(--bright-orange);">
+            <div class="highlight-box" style="margin-top: 30px; width: 80%; border-color: var(--bright-orange);">
                 <strong>大哉問：</strong> 99% 信心就代表「一定正確」嗎？
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-calculator"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">🏥 醫療篩檢 99% 準確，代表還是會有 1% 錯誤。<br>如果是全臺灣 2300 萬人來算，1% 就是 <strong>23 萬人</strong>被誤判！</div>
+                </div>
             </div>
         </div>
     </div>
@@ -442,7 +561,16 @@
                 <div class="tile"><i class="fas fa-ruler-vertical"></i><h3>身高比例</h3></div>
                 <div class="tile"><i class="fas fa-walking"></i><h3>步態分析</h3></div>
             </div>
-            <p style="margin-top: 30px; font-size: 24px; text-align: center; font-weight: 700;">這些是「生理上」的你，AI 正在將你數字化。</p>
+            <p style="margin-top: 20px; font-size: 24px; text-align: center; font-weight: 700;">這些是「生理上」的你，AI 正在將你數字化。</p>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-id-card"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">🇹🇼 在臺灣對應的資料庫：<br>👉 健保卡照片、內政部證件照資料庫、警察局指紋辦案系統。</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -459,7 +587,16 @@
                     <li><i class="fas fa-location-dot" style="color:var(--tech-blue)"></i> GPS 定位紀錄</li>
                 </ul>
                 <div style="text-align: center;">
-                    <i class="fas fa-network-wired" style="font-size: 200px; color: var(--neon-purple); opacity: 0.5;"></i>
+                    <i class="fas fa-network-wired" style="font-size: 150px; color: var(--neon-purple); opacity: 0.5;"></i>
+                </div>
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-comment-dots"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">🌐 這些資料來自哪裡？<br>👉 Google 搜尋紀錄、LINE 群組訊息、蝦皮購買紀錄、手機基地台定位。</div>
                 </div>
             </div>
         </div>
@@ -470,17 +607,26 @@
         <div class="corner-logo"><i class="fas fa-chart-bar"></i></div>
         <div class="slide-content">
             <h2 class="slide-title">嫌疑分數變化圖</h2>
-            <div style="margin-top: 40px;">
+            <div style="margin-top: 20px;">
                 <p style="font-size: 22px; margin-bottom: 10px;">資料一：臉部辨識 (與嫌疑犯 60% 相似)</p>
                 <div class="progress-container" style="height: 20px;"><div class="progress-bar" style="width: 30%;"></div></div>
                 
-                <p style="font-size: 22px; margin-bottom: 10px; margin-top: 30px;">資料二：搜尋過「化學試劑」</p>
+                <p style="font-size: 22px; margin-bottom: 10px; margin-top: 20px;">資料二：搜尋過「化學試劑」</p>
                 <div class="progress-container" style="height: 20px;"><div class="progress-bar" style="width: 70%; background: var(--bright-orange);"></div></div>
                 
-                <p style="font-size: 22px; margin-bottom: 10px; margin-top: 30px;">資料三：曾在凌晨三點出現在機場周邊</p>
+                <p style="font-size: 22px; margin-bottom: 10px; margin-top: 20px;">資料三：曾在凌晨三點出現在機場周邊</p>
                 <div class="progress-container" style="height: 20px;"><div class="progress-bar" style="width: 99%; background: var(--neon-purple);"></div></div>
             </div>
-            <p style="margin-top: 40px; font-weight: 900; font-size: 28px; text-align: center; color: var(--neon-purple);">讓學生觀察：哪些資料真的相關？</p>
+            <p style="margin-top: 20px; font-weight: 900; font-size: 26px; text-align: center; color: var(--neon-purple);">讓學生觀察：哪些資料真的相關？</p>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-magnifying-glass"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">🔍 如果你只是出國前，在 Google 上搜尋過「機場地圖」，<br>AI 會不會因為這樣，就把你當成有心策劃的嫌疑人？</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -489,7 +635,7 @@
         <div class="corner-logo"><i class="fas fa-balance-scale"></i></div>
         <div class="slide-content">
             <p class="section-tag">第四單元：預測 ≠ 決策</p>
-            <h2 class="slide-title" style="border:none; text-align: center; margin-bottom: 60px;">關鍵概念對比</h2>
+            <h2 class="slide-title" style="border:none; text-align: center; margin-bottom: 40px;">關鍵概念對比</h2>
             <div class="grid-2">
                 <div class="tile" style="border-bottom: 10px solid var(--tech-blue);">
                     <h3 style="font-size: 36px; color: var(--tech-blue);">AI 做的是<br>「預測」</h3>
@@ -498,6 +644,15 @@
                 <div class="tile" style="border-bottom: 10px solid var(--neon-purple);">
                     <h3 style="font-size: 36px; color: var(--neon-purple);">人類做的是<br>「決策」</h3>
                     <p>根據價值觀下決定</p>
+                </div>
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-school"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">⚠️ <strong>預測：</strong>你可能會遲到 ➔ <strong>決策：</strong>老師記你曠課。<br>⚠️ <strong>預測：</strong>你可能信用風險高 ➔ <strong>決策：</strong>銀行不讓你貸款。</div>
                 </div>
             </div>
         </div>
@@ -513,8 +668,17 @@
                 <div class="tile"><h3>權重設計</h3><p>設計者決定哪個數據比較重要</p></div>
                 <div class="tile"><h3>設計者選擇</h3><p>人類偏見被寫進了演算法</p></div>
             </div>
-            <div class="highlight-box" style="margin-top: 50px; font-size: 24px;">
+            <div class="highlight-box" style="margin-top: 30px; font-size: 24px;">
                 <strong>小提醒：</strong> AI 本身沒有偏見，但餵給它的資料和規則是由「有偏見的人類」決定的。
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-city"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">如果系統偏向「城市資料」、忽略「偏鄉資料」...<br>例如：設計者只用「都會區學生」的數據做分析，就會產生嚴重偏差。</div>
+                </div>
             </div>
         </div>
     </div>
@@ -523,11 +687,20 @@
     <div class="slide" id="slide15">
         <div class="corner-logo"><i class="fas fa-balance-scale"></i></div>
         <div class="slide-content flex-center">
-            <h2 style="font-size: 60px; color: var(--bright-orange); margin-bottom: 40px;">重大問題</h2>
-            <div class="highlight-box" style="font-size: 42px; border: 4px solid var(--tech-blue); border-radius: 30px; padding: 60px;">
+            <h2 style="font-size: 60px; color: var(--bright-orange); margin-bottom: 30px;">重大問題</h2>
+            <div class="highlight-box" style="font-size: 40px; border: 4px solid var(--tech-blue); border-radius: 30px; padding: 50px;">
                 如果 AI 只訓練了某種膚色的人，<br>
                 應用在全球機場時，<br>
                 會發生什麼不公平的事？
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-graduation-cap"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">🏫 想一想：如果大學入學的 AI 審查系統，只用「明星高中」的資料來訓練？<br>會不會直接影響到偏鄉學生的升學權益？</div>
+                </div>
             </div>
         </div>
     </div>
@@ -538,7 +711,16 @@
         <div class="slide-content flex-center">
             <p class="section-tag" style="color: rgba(255,255,255,0.8)">第五單元：人類責任</p>
             <h1 style="font-size: 70px; margin-bottom: 30px;">誰該負責？</h1>
-            <i class="fas fa-gavel" style="font-size: 150px;"></i>
+            <i class="fas fa-gavel" style="font-size: 130px;"></i>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box" style="background-color: #fffbeb; color: var(--dark-text);">
+                <i class="fas fa-scale-balanced"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">⚖️ 誰決定哪些資料可以用？誰決定是否使用監控？誰決定是否公開演算法？<br>這是臺灣推動科技治理時，必須面對的問題。</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -549,12 +731,21 @@
             <h2 class="slide-title">AI 設計者的選擇</h2>
             <div class="grid-2">
                 <div>
-                    <i class="fas fa-user-gear" style="font-size: 250px; color: var(--tech-blue);"></i>
+                    <i class="fas fa-user-gear" style="font-size: 220px; color: var(--tech-blue);"></i>
                 </div>
                 <div class="highlight-box">
                     誰決定要用什麼資料？<br>
                     誰決定 99% 信心就該逮捕？<br><br>
                     <strong>不是機器，是背後的人。</strong>
+                </div>
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-file-signature"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">📝 <strong>誰決定：</strong>哪些資料可以用？是否要在街頭或校園使用監控？是否公開演算法運作規則？</div>
                 </div>
             </div>
         </div>
@@ -570,7 +761,16 @@
                 <div class="tile"><h3>政府機關？</h3><p>決定使用系統的長官</p></div>
                 <div class="tile"><h3>旅客自己？</h3><p>資料足跡混亂的人</p></div>
             </div>
-            <p style="margin-top: 50px; font-size: 28px; text-align: center; font-weight: 700;">思考題：如果 AI 誤判了，這是一個「不幸的意外」還是「人類的錯誤」？</p>
+            <p style="margin-top: 30px; font-size: 26px; text-align: center; font-weight: 700;">思考題：如果 AI 誤判了，這是一個「不幸的意外」還是「人類的錯誤」？</p>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-chalkboard-user"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">如果 AI 錯判你考試作弊，老師直接依照 AI 紀錄給你處分。<br>責任到底在：AI？老師？學校？還是系統設計者？</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -579,11 +779,20 @@
         <div class="corner-logo"><i class="fas fa-brain"></i></div>
         <div class="slide-content">
             <h2 class="slide-title">Safeguards 設計挑戰</h2>
-            <div class="grid-2">
-                <div class="tile"><i class="fas fa-user-shield"></i><h3>人工複審</h3><p>最終決定權留給人</p></div>
-                <div class="tile"><i class="fas fa-users-viewfinder"></i><h3>多元資料</h3><p>讓 AI 見多識廣</p></div>
-                <div class="tile"><i class="fas fa-eye"></i><h3>公開透明度</h3><p>知道 AI 怎麼算的</p></div>
-                <div class="tile"><i class="fas fa-bullhorn"></i><h3>申訴機制</h3><p>讓人有平反機會</p></div>
+            <div class="grid-2" style="gap: 20px;">
+                <div class="tile" style="padding:20px;"><i class="fas fa-user-shield" style="font-size:35px;"></i><h3>人工複審</h3><p>最終決定權留給人</p></div>
+                <div class="tile" style="padding:20px;"><i class="fas fa-users-viewfinder" style="font-size:35px;"></i><h3>多元資料</h3><p>讓 AI 見多識廣</p></div>
+                <div class="tile" style="padding:20px;"><i class="fas fa-eye" style="font-size:35px;"></i><h3>公開透明度</h3><p>知道 AI 怎麼算的</p></div>
+                <div class="tile" style="padding:20px;"><i class="fas fa-bullhorn" style="font-size:35px;"></i><h3>申訴機制</h3><p>讓人有平反機會</p></div>
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-shield-halved"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">🛡️ 臺灣需要的防護網：人工複審機制、暢通的申訴管道、公開說明演算法、資料定期審查機制。</div>
+                </div>
             </div>
         </div>
     </div>
@@ -620,6 +829,15 @@
                     </tr>
                 </tbody>
             </table>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-building-columns"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">🏦 <strong>在臺灣真實發生中：</strong>金融機構的信用評分、網路廣告精準投放、升學推薦審查系統、健保醫療影像輔助判讀。</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -629,10 +847,19 @@
         <div class="slide-content flex-center">
             <h2 style="font-size: 60px; margin-bottom: 40px;">你相信 AI 嗎？</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
-                <div style="background: #dcfce7; padding: 30px; border-radius: 15px;">完全相信</div>
-                <div style="background: #fee2e2; padding: 30px; border-radius: 15px;">完全不信</div>
-                <div style="background: #fef9c3; padding: 30px; border-radius: 15px;">看情況</div>
-                <div style="background: #e0f2fe; padding: 30px; border-radius: 15px;">由人類主導</div>
+                <div style="background: #dcfce7; padding: 30px; border-radius: 15px; font-size: 24px; font-weight: bold;">完全相信</div>
+                <div style="background: #fee2e2; padding: 30px; border-radius: 15px; font-size: 24px; font-weight: bold;">完全不信</div>
+                <div style="background: #fef9c3; padding: 30px; border-radius: 15px; font-size: 24px; font-weight: bold;">看情況</div>
+                <div style="background: #e0f2fe; padding: 30px; border-radius: 15px; font-size: 24px; font-weight: bold;">由人類主導</div>
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-person-walking-arrow-right"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">📍 走進角落選擇你的立場：完全信任 AI、有限信任、高度懷疑，還是只信人類？</div>
+                </div>
             </div>
         </div>
     </div>
@@ -643,19 +870,28 @@
         <div class="slide-content">
             <h2 class="slide-title">核心總結</h2>
             <div class="grid-2">
-                <div class="highlight-box" style="height: 400px; display: flex; flex-direction: column; justify-content: center;">
+                <div class="highlight-box" style="height: 350px; display: flex; flex-direction: column; justify-content: center;">
                     <h3 style="color:var(--tech-blue)">AI 是：</h3>
                     <ul style="margin-top: 20px; line-height: 2;">
                         <li>✔ 找模式</li>
                         <li>✔ 做預測</li>
                     </ul>
                 </div>
-                <div class="highlight-box" style="height: 400px; display: flex; flex-direction: column; justify-content: center; border-color: var(--bright-orange);">
+                <div class="highlight-box" style="height: 350px; display: flex; flex-direction: column; justify-content: center; border-color: var(--bright-orange);">
                     <h3 style="color:var(--bright-orange)">但要注意：</h3>
                     <ul style="margin-top: 20px; line-height: 2;">
                         <li>⚠ 可能有偏差</li>
                         <li>⚠ 需要人類監督</li>
                     </ul>
+                </div>
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-hand-holding-heart"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">💡 AI 很聰明，但「不負責」。真正該為這些科技決定負起責任的，永遠是人類。</div>
                 </div>
             </div>
         </div>
@@ -671,6 +907,15 @@
                 哪一種決定<br>
                 「<span style="color:var(--bright-orange)">絕對不能交給 AI 單獨完成</span>」？
             </p>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box" style="background-color: #fffbeb; color: var(--dark-text);">
+                <i class="fas fa-circle-question"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">🎓 如果 AI 決定：你是否錄取高中？你是否可以申請貸款？你是否犯罪？<br>哪一項絕對不能只交給 AI？</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -679,13 +924,22 @@
         <div class="corner-logo"><i class="fas fa-chart-bar"></i></div>
         <div class="slide-content">
             <h2 class="slide-title">評量設計頁</h2>
-            <div style="background: white; padding: 50px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                <p style="font-size: 28px; margin-bottom: 30px;">請在學習單寫出：</p>
-                <ul style="font-size: 24px; line-height: 2.5;">
+            <div style="background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <p style="font-size: 28px; margin-bottom: 20px;">請在學習單寫出：</p>
+                <ul style="font-size: 24px; line-height: 2;">
                     <li><i class="fas fa-triangle-exclamation" style="color:var(--bright-orange)"></i> 一個 AI 運作可能帶來的<strong>風險</strong></li>
                     <li><i class="fas fa-shield-halved" style="color:var(--tech-blue)"></i> 一個能減輕風險的<strong>保障機制</strong></li>
                     <li><i class="fas fa-user-check" style="color:var(--neon-purple)"></i> 一個你在 AI 時代應承擔的<strong>人類責任</strong></li>
                 </ul>
+            </div>
+
+            <!-- 臺灣生活案例 -->
+            <div class="tw-example-box">
+                <i class="fas fa-pen-to-square"></i>
+                <div class="tw-example-box-content">
+                    <h4>臺灣生活案例</h4>
+                    <div class="desc">📝 結合你的臺灣生活經驗（如捷運悠遊卡、LINE、蝦皮等），寫下你對 AI 時代的觀察與具體行動！</div>
+                </div>
             </div>
         </div>
     </div>
